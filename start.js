@@ -12,5 +12,5 @@ app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/public'));
 
 app.listen(port,() => {
-  console.log(`Express is running on port ${server.address().port}`);
+  console.log(`Express is running on port ${port}`);
 });
