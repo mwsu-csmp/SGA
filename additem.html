@@ -153,9 +153,11 @@
    <div class="container">
    <div class="row">
    <form id="additemform">
-      <p><label for="tnum">Tag Number</label>
-         <p><input type="number" name="tnum" min="0" max="9999999" placeholder="#"></p></p>
-         <p><label for="pics">Pictures of Item</label>
+         <p><label for="tagnum">Tag Number</label>
+            <p><input type="number" id = "tagnum" name="tagnum" min="0" max="9999999" placeholder="#"></p></p>
+         <p><label for="noanum">NOA Number</label>
+            <p><input type="number" id = "noanum" name="noanum" min="0" max="9999999" placeholder="#"></p></p>
+         <p><label for="itempicture">Pictures of Item</label>
          <input type="file" id="itempicture" accept="image/*"></p>
          <label for="itemname">Item Name</label>
          <input type="text" id="itemname" name="itemname" placeholder="...">
@@ -164,7 +166,7 @@
          <label for="manuname">Manufacturer Name</label>
          <input type="text" id="manuname" name="manufacturername" placeholder="...">
          <p><label for="modnum">Model Number</label>
-         <p><input type="number" name="modnum" min="0" max="9999999" placeholder="#"></p></p>
+         <p><input type="number" id = "modnum" name="modnum" min="0" max="9999999" placeholder="#"></p></p>
          <label for="sernum">Serial Number</label>
          <input type="text" id="sernum" name="sernumber" placeholder="...">
          <label for="sellname">Seller Name</label>
@@ -199,7 +201,7 @@
            <option value="Every 6 Academic Years">Every 6 Academic Years</option>
          </select></p>
          <label for="assignrso">Assign RSO</label>
-         <p><input list="RSO" placeholder="Search">
+         <p><input id="selectedRSO" name = "RSO" list="RSO" placeholder="Search">
          <datalist id="RSO">
          </datalist></p>
          <input type="submit" class="dropbtn btn btn-default" value="Add Item">
@@ -208,11 +210,18 @@
       $(document).ready(function(){
          $.ajax({
             url: 'http://localhost:3000/sga/additem.html',
-            method: 'get',
-            crossDomain: true,
-            dataType: 'application/json',
+            method: 'GET',
+            dataType: 'json',
             success: function(data){
-               alert(data);
+               //console.log(data);
+               for (key in data){
+                  var text = data[key]
+                  console.log(text);
+                  $('#RSO').append("<option>"+text+"</option>");
+               }
+            },
+            error: function(jqXHR, textStatus, errorThrown){
+               console.log(errorThrown);
             }
          })
       })
@@ -227,6 +236,7 @@
          var formData = new FormData(additemform)
       
          formData.append("itempicture", new Blob([itempicture.files[0]]))
+         formData.append("RSO", $('#selectedRSO').val())
 
          let response = await fetch('http://localhost:3000/sga/additem.html', {
             method: 'POST',
@@ -235,7 +245,7 @@
       
          let result = await response.json()
       
-         alert(result.message, null)
+         alert(result.body, null)
       }
    </script>
    </div>

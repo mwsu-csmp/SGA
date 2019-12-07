@@ -20,42 +20,37 @@ connection.connect(function(err){
 
 router.get("/sga/additem.html", (req, res) => {
   
-  var tbl = []
-
   connection.query("SELECT RSO_NAME FROM RSO", (err, results, fields) => {
     if (err) {
       console.log('error')
     } else {
+      var tbl = []
+
       for (i in results){
         tbl[i] = results[i].RSO_NAME
       }
+      
+      res.setHeader("Access-Control-Allow-Origin", "*");
+      res.send(JSON.stringify(tbl))
     }
   })
 
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.send(JSON.stringify(tbl))
 })
 
 router.post("/sga/additem.html", (req, res) => {
   var host = req.get('host');
-  console.log(host);
-
-  for (i in req.fields)
-    console.log(i, req.fields[i])
-
-  for (i in req.files)
-    console.log(req.files[i].size)
  
   var picture = req.files["itempicture"];
-  var number = req.files["tagnumber"];
+  var number = req.fields["tagnum"];
+  var noanum = req.fields["noanum"];
   var name = req.fields["itemname"];
   var desc = req.fields["itemdescription"];
   var manuname = req.fields["manufacturername"];
-  var modnum = req.fields["modelnumber"];
-  var sernum = req.fields["serialnumber"];
+  var modnum = req.fields["modnum"];
+  var sernum = req.fields["sernumber"];
   var sellname = req.fields["sellername"];
   var purdate = req.fields["purchasedate"];
-  var purprice = req.fields["purchaseprice"];
+  var purprice = req.fields["purprice"];
   var warr = req.fields["warranty"];
   var warrenddate = req.fields["warrantyenddate"];
   var storloc = req.fields["storageloaction"];
@@ -64,23 +59,20 @@ router.post("/sga/additem.html", (req, res) => {
   var rso = req.fields["RSO"];
 
   var tbl = [
-    [number,name,desc,manuname,modnum,sernum,condition,sellname,purdate,purprice,warr,warrenddate,foccategory,storloc,rso]
+    [picture,number,noanum,name,desc,manuname,modnum,sernum,condition,sellname,purdate,purprice,warr,warrenddate,foccategory,storloc,rso]
   ]
 
-  console.log(tbl)
-
-  var sql = "INSERT INTO INVENTORY(TAG_NUM, ITEM_NAME, ITEM_DESC, MANUFACT_NAME, MODEL_NUM, SERIAL_NUM, ITEM_COND, SELLER_NAME, PUR_DATE, PUR_PRICE, WARRANTY, WAR_END_DATE, FOC_CAT, STORE_LOCAL, RSO_NAME) VALUES ?";
+  var sql = "INSERT INTO INVENTORY(ITEM_PIC, TAG_NUM, NOA_NUM, ITEM_NAME, ITEM_DESC, MANUFACT_NAME, MODEL_NUM, SERIAL_NUM, ITEM_COND, SELLER_NAME, PUR_DATE, PUR_PRICE, WARRANTY, WAR_END_DATE, FOC_CAT, STORE_LOCAL, RSO_NAME) VALUES ?";
 
   connection.query(sql, [tbl], (err) => {
     if (err) {
-      console.log(err.stack);
+      res.setHeader("Access-Control-Allow-Origin", "*");
+      res.send(JSON.stringify({body: 'Error: ' + err.stack}))
     } else {
-      console.log('Inserted new item!');
+      res.setHeader("Access-Control-Allow-Origin", "*");
+      res.send(JSON.stringify({body: 'Inserted item into item table'}))
     } 
   });
-
-  res.writeHead(200, {"Content-Type": "application/json"})
-  res.write(JSON.stringify({message: 'Inserted'}))
 });
 
 module.exports = router;
