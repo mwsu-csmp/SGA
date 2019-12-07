@@ -18,6 +18,10 @@ connection.connect(function(err){
   }
 });
 
+router.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname + '/index.html'))
+})
+
 router.get("/sga/additem.html", (req, res) => {
   
   connection.query("SELECT RSO_NAME FROM RSO", (err, results, fields) => {
