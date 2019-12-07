@@ -19,7 +19,7 @@ connection.connect(function(err){
 });
 
 router.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname + '/index.html'))
+  res.render('index')
 })
 
 router.get("/sga/additem.html", (req, res) => {
