@@ -2,6 +2,24 @@ const express = require('express');
 const router = express.Router();
 const mysql = require('mysql');
 
+var passport = require('passport')
+, LocalStrategy = require('passport-local').Strategy;
+
+passport.use(new LocalStrategy(
+  function(username, password, done) {
+    User.findOne({ username: username }, function(err, user) {
+      if (err) { return done(err); }
+      if (!user) {
+        return done(null, false, { message: 'Incorrect username.' });
+      }
+      if (!user.validPassword(password)) {
+        return done(null, false, { message: 'Incorrect password.' });
+      }
+      return done(null, user);
+    });
+  }
+));
+
 const connection = mysql.createConnection({
   host: 'noynaert.cs.missouriwestern.edu',
   user: 'sga',
@@ -20,6 +38,14 @@ connection.connect(function(err){
 
 router.get("/", (req, res) => {
   res.render("index.html")
+})
+
+router.post("/", (req, res) => {
+  passport.authenticate('local', {
+    successRedirect: '/sga',
+    failureRedirect: '/',
+    failureFlash: true
+  })
 })
 
 router.get("/sga", (req, res) => {
