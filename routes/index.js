@@ -2,24 +2,6 @@ const express = require('express');
 const router = express.Router();
 const mysql = require('mysql');
 
-var passport = require('passport')
-, LocalStrategy = require('passport-local').Strategy;
-
-passport.use(new LocalStrategy(
-  function(username, password, done) {
-    User.findOne({ username: username }, function(err, user) {
-      if (err) { return done(err); }
-      if (!user) {
-        return done(null, false, { message: 'Incorrect username.' });
-      }
-      if (!user.validPassword(password)) {
-        return done(null, false, { message: 'Incorrect password.' });
-      }
-      return done(null, user);
-    });
-  }
-));
-
 const connection = mysql.createConnection({
   host: 'noynaert.cs.missouriwestern.edu',
   user: 'sga',
@@ -40,13 +22,15 @@ router.get("/", (req, res) => {
   res.render("index.html")
 })
 
-router.post("/", (req, res) => {
-  passport.authenticate('local', {
-    successRedirect: '/sga',
-    failureRedirect: '/',
-    failureFlash: true
-  })
-})
+router.post('/login', (req, res) => {
+  var user = req.fields["user"]
+  var pass = req.fields["password"]
+  if (user === "sga" &&  pass === "sgaPassword"){
+    res.redirect('/sga')
+  } else {
+    res.redirect('/')
+  }
+});
 
 router.get("/sga", (req, res) => {
   res.render('admindashboard.html')
@@ -75,9 +59,7 @@ router.get("/sga/rso_names", (req, res) => {
 
 })
 
-router.post("/sga/additem.html", (req, res) => {
-  var host = req.get('host');
- 
+router.post("/sga/additem.html", (req, res) => { 
   var picture = req.files["itempicture"];
   var number = req.fields["tagnum"];
   var noanum = req.fields["noanum"];
