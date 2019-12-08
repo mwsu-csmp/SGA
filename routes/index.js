@@ -19,8 +19,16 @@ connection.connect(function(err){
 });
 
 router.get("/", (req, res) => {
-  res.render('index')
+  res.render('index.html')
 })
+
+router.get("/sga", (req, res) => {
+  res.render('admindashboard.html')
+})
+
+router.get("/sga/additem.html", (req, res) => {
+  res.render('additem.html')
+});
 
 router.get("/sga/additem.html", (req, res) => {
   
