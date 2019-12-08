@@ -209,7 +209,7 @@
    <script>
       $(document).ready(function(){
          $.ajax({
-            url: 'http://localhost:3000/sga/additem.html',
+            url: 'https://secure-forest-78791.herokuapp.com/sga/additem.html',
             method: 'GET',
             dataType: 'json',
             success: function(data){
@@ -238,7 +238,7 @@
          formData.append("itempicture", new Blob([itempicture.files[0]]))
          formData.append("RSO", $('#selectedRSO').val())
 
-         let response = await fetch('http://localhost:3000/sga/additem.html', {
+         let response = await fetch('https://secure-forest-78791.herokuapp.com/sga/additem.html', {
             method: 'POST',
             body: formData
          })
