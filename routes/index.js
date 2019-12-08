@@ -19,7 +19,7 @@ connection.connect(function(err){
 });
 
 router.get("/", (req, res) => {
-  res.render()
+  res.render("index.html")
 })
 
 router.get("/sga", (req, res) => {
