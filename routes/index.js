@@ -30,7 +30,7 @@ router.get("/sga/additem.html", (req, res) => {
   res.render('additem.html')
 });
 
-router.get("/sga/additem.html", (req, res) => {
+router.get("/sga/rso_names", (req, res) => {
   
   connection.query("SELECT RSO_NAME FROM RSO", (err, results, fields) => {
     if (err) {
