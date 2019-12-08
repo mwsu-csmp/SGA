@@ -9,6 +9,7 @@ if (port == null || port == "") {
 
 app.set('view engine', 'ejs');
 
+console.log(__dirname)
 app.use(express.static(__dirname + '/public'));
 
 app.listen(port,() => {
