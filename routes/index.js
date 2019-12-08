@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const mysql = require('mysql');
 
-var passport = require('passport')
+var passport = require('passport-local')
 , LocalStrategy = require('passport-local').Strategy;
 
 passport.use(new LocalStrategy(
