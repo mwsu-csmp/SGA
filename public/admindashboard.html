@@ -105,12 +105,22 @@
             <div class="col-md-4">
                 <h2>Add Item</h2>
                 <p>Some random text about adding items.</p>
-                <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+                <p><a class="btn btn-default" id ="additem" role="button">View details &raquo;</a></p>
             </div>
         </div>
         <hr>
-    </div>
- 
+      </div>
+      <script>
+        $('#additem').click = async(e) => {
+          $.ajax({
+            method: 'GET',
+            url: 'https://secure-forest-78791.herokuapp.com/sga/additem.html',
+            success: function(){
+              
+            }
+          })
+        }
+      </script>
   <div class="footer">
     <hr width="80%">
       <p> Missouri Western State University <br>
