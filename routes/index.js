@@ -22,6 +22,8 @@ router.get("/", (req, res) => {
   res.render("index.html")
 })
 
+router.post("")
+
 router.get("/sga", (req, res) => {
   res.render('admindashboard.html')
 })
