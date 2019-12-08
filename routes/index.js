@@ -25,11 +25,10 @@ router.get("/", (req, res) => {
 router.post('/login', (req, res) => {
   var user = req.fields["username"]
   var pass = req.fields["password"]
-  console.log(user, pass)
   if (user == "sga" && pass == "sgaPassword"){
-    res.redirect('/sga')
+    res.render('admindashboard.html')
   } else {
-    res.redirect('/')
+    res.render('index.html')
   }
 });
 
