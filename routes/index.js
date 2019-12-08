@@ -22,21 +22,6 @@ router.get("/", (req, res) => {
   res.render("index.html")
 })
 
-<<<<<<< HEAD
-router.post("")
-=======
-router.post('/login', (req, res) => {
-  var user = req.fields["username"]
-  var pass = req.fields["password"]
-  if (user === "sga" && pass === "sgaPassword"){
-    console.log("here")
-    res.redirect('/sga')
-  } else {
-    res.render('/')
-  }
-});
->>>>>>> 25d2e6f98ab9c3985fdcd3e8fb504487f68f22aa
-
 router.get("/sga", (req, res) => {
   res.render('admindashboard.html')
 })
@@ -64,7 +49,9 @@ router.get("/sga/rso_names", (req, res) => {
 
 })
 
-router.post("/sga/additem.html", (req, res) => { 
+router.post("/sga/additem.html", (req, res) => {
+  var host = req.get('host');
+ 
   var picture = req.files["itempicture"];
   var number = req.fields["tagnum"];
   var noanum = req.fields["noanum"];
