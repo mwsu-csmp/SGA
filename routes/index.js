@@ -25,7 +25,8 @@ router.get("/", (req, res) => {
 router.post('/login', (req, res) => {
   var user = req.fields["username"]
   var pass = req.fields["password"]
-  if (user == "sga" && pass == "sgaPassword"){
+  if (user === "sga" && pass === "sgaPassword"){
+    console.log("here")
     res.render('admindashboard.html')
   } else {
     res.render('index.html')
