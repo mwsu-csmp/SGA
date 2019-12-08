@@ -23,7 +23,7 @@ router.get("/", (req, res) => {
 })
 
 router.post('/login', (req, res) => {
-  var user = req.fields["user"]
+  var user = req.fields["username"]
   var pass = req.fields["password"]
   if (user === "sga" &&  pass === "sgaPassword"){
     res.redirect('/sga')
