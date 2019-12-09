@@ -56,8 +56,21 @@ router.get("/sga/rso_names", (req, res) => {
 
 router.post("/sga/itemsearch.html", (req, res) => {
   for (i in req.fields)
-    console.log(i)
-    
+    console.log(i, req.fields[i])
+  
+  var tbl = []
+
+  tbl['tnum'] = 'TAG_NUM'
+  tbl['itemname'] = 'ITEM_NAME'
+  tbl['RSO'] = 'RSO_NAME'
+
+  var sql = "SELECT * FROM INVENTORY WHERE ";
+  for (i in req.fields){
+
+  }
+
+  //connection.query()
+
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.send(JSON.stringify({body: 'Searched'}))
 })
