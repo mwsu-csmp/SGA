@@ -239,15 +239,15 @@
               body: formData
           }).then(response => response.json())
             .then(data => { 
-              console.log(data);
+              console.log(data.body);
 
-              if (data.length > 0){
+              if (data.body.length > 0){
                 searchforitem.style.visibility = 'hidden';
                 returnTable.style.visibility = 'visible';
-                for (i in result.body){
+                for (i in data.body){
                   var str = "<tr>\n"
-                  for(s in result.body[i]){
-                    str += "<th> " + result.body[i][s] + " </th>\n"
+                  for(s in data.body[i]){
+                    str += "<th> " + data.body[i][s] + " </th>\n"
                   }
                   str += "\n</tr>"
                   $("#returnTable tbody").append(str)
