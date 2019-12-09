@@ -173,7 +173,7 @@
     </div>
     <div class="container">
         <div class="row">
-            <div class="form">
+            <form id = "searchforitem">
                     <p><label for="tnum">Search by the assigned Tag Number</label>
                     <p><input type="number" name="tnum" min="0" max="9999999" placeholder="#"></p></p>
                     <label for="itemname">Search by the assigned Item Name</label>
@@ -181,85 +181,51 @@
                     <label for="itemname">Search by the assigned Advisor Name</label>
                     <input type="text" id="advname" name="advisorname" placeholder="...">
                     <label for="assignrso">Search by the Assigned RSO</label>
-                    <p><input list="brow" placeholder="Search">
-                    <datalist id="brow">
-                      <option value="7 Thunders">
-                      <option value="Active Minds">
-                      <option value="Alpha Chi">
-                      <option value="Alpha Gamma Delta">
-                      <option value="Alpha Kappa Alpha">
-                      <option value="Alpha Kappa Psi">
-                      <option value="Alpha Phi Alpha Fraternity, Inc. - Sigma Kappa">
-                      <option value="Alpha Psi Omega">
-                      <option value="Alpha Sigma Alpha">
-                      <option value="American Institute of Graphic Designers (Formerly Design Outlook)">
-                      <option value="Animation Club">
-                      <option value="Anime Club">
-                      <option value="Beta Beta Beta">
-                      <option value="Black Student Union">
-                      <option value="Delta Sigma Theta">
-                      <option value="Campus Christian Fellowship">
-                      <option value="Catholic Newman Center">
-                      <option value="Creative Writing Club">
-                      <option value="Griffon Film Society">
-                      <option value="Griffon Trans Alliance">
-                      <option value="Honors League">
-                      <option value="Indian Student Association of Missouri Western State University">
-                      <option value="Inter-Fraternal Council">
-                      <option value="International Student Council">
-                      <option value="Kappa Mu Epsilon">
-                      <option value="Missouri Western Accounting Club">
-                      <option value="Missouri Western College Democrats">
-                      <option value="Missouri Western Dance Company">
-                      <option value="Missouri Western Gender and Sexuality Alliance">
-                      <option value="Missouri Western Soccer Club">
-                      <option value="Model Arab League">
-                      <option value="MWSU ACM Student Chapter">
-                      <option value="MWSU Art History Club">
-                      <option value="MWSU Board Game Club">
-                      <option value="MWSU Bowling Club">
-                      <option value="MWSU Chapter of Society for Collegiate Journalists">
-                      <option value="MWSU Chess Club">
-                      <option value="MWSU Economics Club">
-                      <option value="MWSU Geography Club">
-                      <option value="MWSU OxFam Club">
-                      <option value="MWSU Reach Club">
-                      <option value="NAACP">
-                      <option value="National Association for Music Education-Collegiate">
-                      <option value="National Pan-Hellenic Council">
-                      <option value="National Society of Leadership and Success">
-                      <option value="Navigators">
-                      <option value="Non Traditional Student Association">
-                      <option value="Organization of Student Social Workers (OSSW)">
-                      <option value="Phi Alpha Theta (History Honor Society)">
-                      <option value="Phi Beta Lambda">
-                      <option value="Phi Beta Sigma">
-                      <option value="Phi Boota Roota">
-                      <option value="Phi Delta Theta">
-                      <option value="Physical Therapist Assistant Club">
-                      <option value="Pi Sigma Alpha">
-                      <option value="Pre Professional Club">
-                      <option value="Psi Chi /Psychology Club">
-                      <option value="Renewal">
-                      <option value="Sigma Alpha Iota">
-                      <option value="Student Association of Sociology">
-                      <option value="Student Athlete Advisory Committee">
-                      <option value="Student Honors Organization">
-                      <option value="Student Nurses Association">
-                      <option value="Student Veterans of America">
-                      <option value="Subset of Undergraduate Math Students (SUMS)">
-                      <option value="The History Society">
-                      <option value="The Left Wing">
-                      <option value="The Wildlife Society">
-                      <option value="Western Activities Council">
-                      <option value="Women of the Future">
-                      <option value="Young Life">
+                    <p><input list="RSO" id = "selectedRSO" placeholder="Search">
+                    <datalist id="RSO">
                     </datalist></p>
                     <input type="submit"  class="dropbtn btn btn-default" value="Start Search">
                 </div>
             </form>
+            <script>
+              $(document).ready(function(){
+                $.ajax({
+                    url: 'https://secure-forest-78791.herokuapp.com/sga/rso_names',
+                    method: 'GET',
+                    dataType: 'json',
+                    success: function(data){
+                      //console.log(data);
+                      for (key in data){
+                          var text = data[key]
+                          console.log(text);
+                          $('#RSO').append("<option>"+text+"</option>");
+                      }
+                    },
+                    error: function(jqXHR, textStatus, errorThrown){
+                      console.log(errorThrown);
+                    }
+                })
+              })
 
+              var searchforitem = document.getElementById('searchforitem')
 
+              searchforitem.onsubmit = async(e) => {
+                e.preventDefault();
+
+                var formData = new FormData(searchforitem)
+              
+                formData.append("RSO", $('#selectedRSO').val())
+
+                let response = await fetch('https://secure-forest-78791.herokuapp.com/sga/itemsearch.html', {
+                    method: 'POST',
+                    body: formData
+                })
+                
+                let result = await response.json()
+                    
+                alert(result.body, null)
+              }
+            </script>
         </div>
    
   <div class="footer">

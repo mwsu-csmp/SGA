@@ -26,6 +26,10 @@ router.get("/sga", (req, res) => {
   res.render('admindashboard.html')
 })
 
+router.post("/sga/itemsearch.html", (req, res) => {
+  res.render('itemsearch.html')
+})
+
 router.get("/sga/additem.html", (req, res) => {
   console.log("Requested additem page")
   res.render('additem.html')
