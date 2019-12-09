@@ -65,7 +65,7 @@ router.post("/sga/itemsearch.html", (req, res) => {
   var sql = "SELECT * FROM INVENTORY WHERE ";
   for (i in req.fields){
     if (req.fields[i] !== ''){
-      sql += (tbl[i] + " = " + req.fields[i])
+      sql += (tbl[i] + " = " + mysql.escape(req.fields[i]))
     }
   }
 
