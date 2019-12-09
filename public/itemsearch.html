@@ -243,16 +243,10 @@
           let result = await response.json()
               
           if (result.body.length > 0){
-            alert(result.body, null)
             searchforitem.style.visibility = 'hidden';
             returnTable.style.visibility = 'visible';
             for (i in result.body){
-              var str = "<tr>"
-              for(s in result.body[i]){
-                str += "<th>" + s + "</th>"
-              }
-              str += "</tr>"
-              returnTable.append(str)
+              console.log(i, result.body[i][0], result.body[i][1])
             }
           }
         }
