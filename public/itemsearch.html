@@ -186,9 +186,25 @@
             </form>
         </div>
       </div>
+      <div class= "container">
+          <table id = "returnTable">
+              <tr>
+                <th>Tag Number</th>
+                <th>Item Name</th>
+                <th>Advisor Name</th>
+                <th>Assigned RSO</th>
+              </tr>
+            </table>
+      </div>
   
       <script>
+        var searchforitem = document.getElementById('searchforitem')
+        var returnTable = document.getElementById('returnTable')
+
         $(document).ready(function(){
+          returnTable.style.visibility = 'hidden';
+          searchforitem.style.visibility = 'visible';
+
           $.ajax({
               url: 'https://secure-forest-78791.herokuapp.com/sga/rso_names',
               method: 'GET',
@@ -205,10 +221,7 @@
                 console.log(errorThrown);
               }
           })
-        })
-
-        var searchforitem = document.getElementById('searchforitem')
-    
+        })    
 
         searchforitem.onsubmit = async(e) => {
           e.preventDefault();
@@ -226,7 +239,17 @@
               
           if (result.body.length > 0){
             alert(result.body, null)
-            searchforitem.style.visibility = "hidden";
+            searchforitem.style.visibility = 'hidden';
+            returnTable.style.visibility = 'visible';
+            var str = "";
+            for (i in result.body){
+              str += "<tr>"
+              for(s in i){
+                str += "<th>" + s + "</th>"
+              }
+              str += "</tr>"
+            }
+            returnTable.append(str)
           }
         }
       </script>
