@@ -218,7 +218,6 @@
                 //console.log(data);
                 for (key in data){
                     var text = data[key]
-                    console.log(text);
                     $('#RSO').append("<option>"+text+"</option>");
                 }
               },
@@ -242,11 +241,12 @@
           
           let result = await response.json()
               
+          console.log(response.body.text())
+          
           if (result.body.length > 0){
             searchforitem.style.visibility = 'hidden';
             returnTable.style.visibility = 'visible';
             for (i in result.body){
-              console.log(i, result.body[i][0], result.body[i][1])
               var str = "<tr>\n"
               for(s in result.body[i]){
                 str += "<th> " + result.body[i][s] + " </th>\n"
