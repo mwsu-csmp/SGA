@@ -240,7 +240,10 @@
           })
           
           let result = await response.json()
-              
+            .then(body => {
+              console.log(body)
+            })
+
           console.log(response.body)
 
           if (result.body.length > 0){
