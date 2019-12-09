@@ -247,6 +247,12 @@
             returnTable.style.visibility = 'visible';
             for (i in result.body){
               console.log(i, result.body[i][0], result.body[i][1])
+              var str = "<tr>\n"
+              for(s in result.body[i]){
+                str += "<th> " + result.body[i][s] + " </th>"
+              }
+              str += "\n</tr>"
+              returnTable.append(str)
             }
           }
         }
