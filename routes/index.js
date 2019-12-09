@@ -68,12 +68,15 @@ router.post("/sga/itemsearch.html", (req, res) => {
       sql += (tbl[i] + " = " + mysql.escape(req.fields[i]))
     }
   }
-  
+
   connection.query(sql, (err, results, fields) => {
     if (err) {
-      for (i in err)
-        console.log(i, err[i])
+      if (err.code !== 'ER_PARSE_ERROR'){
+        for (i in err)
+          console.log(i, err[i])
+        
         res.send(JSON.stringify({body: "Error"}))
+      } else res.send(JSON.stringify({body: "No valid input"}))
     } else {
       var tbl = []
 
