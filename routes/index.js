@@ -68,16 +68,12 @@ router.post("/sga/itemsearch.html", (req, res) => {
       sql += (tbl[i] + " = " + mysql.escape(req.fields[i]))
     }
   }
-
-  console.log(sql)
-
-  connection.query(mysql, (err, results, fields) => {
+  
+  connection.query(sql, (err, results, fields) => {
     if (err) {
       for (i in err)
         console.log(i, err[i])
-        
-      res.setHeader("Access-Control-Allow-Origin", "*");
-      res.send(JSON.stringify({body: "Error"}))
+        res.send(JSON.stringify({body: "Error"}))
     } else {
       var tbl = []
 
@@ -85,8 +81,7 @@ router.post("/sga/itemsearch.html", (req, res) => {
         tbl[i] = [results[i].TAG_NUM, results[i].ITEM_NAME]
       }
       
-      res.setHeader("Access-Control-Allow-Origin", "*");
-      res.send(JSON.stringify(tbl))
+      res.send(JSON.stringify({body: tbl}))
     }
   })
 })
