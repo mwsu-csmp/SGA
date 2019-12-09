@@ -174,60 +174,60 @@
     <div class="container">
         <div class="row">
             <form id = "searchforitem">
-                    <p><label for="tnum">Search by the assigned Tag Number</label>
-                    <p><input type="number" name="tnum" min="0" max="9999999" placeholder="#"></p></p>
-                    <label for="itemname">Search by the assigned Item Name</label>
-                    <input type="text" id="itemname" name="itemname" placeholder="...">
-                    <label for="itemname">Search by the assigned Advisor Name</label>
-                    <input type="text" id="advname" name="advisorname" placeholder="...">
-                    <label for="assignrso">Search by the Assigned RSO</label>
-                    <p><input list="RSO" id = "selectedRSO" placeholder="Search">
-                    <datalist id="RSO">
-                    </datalist></p>
-                    <input type="submit"  class="dropbtn btn btn-default" value="Start Search">
-                </div>
+              <p><label for="tnum">Search by the assigned Tag Number</label>
+              <p><input type="number" name="tnum" min="0" max="9999999" placeholder="#"></p></p>
+              <label for="itemname">Search by the assigned Item Name</label>
+              <input type="text" id="itemname" name="itemname" placeholder="...">
+              <label for="itemname">Search by the assigned Advisor Name</label>
+              <input type="text" id="advname" name="advisorname" placeholder="...">
+              <label for="assignrso">Search by the Assigned RSO</label>
+              <p><input list="RSO" id = "selectedRSO" placeholder="Search">
+              <datalist id="RSO">
+              </datalist></p>
+              <input type="submit"  class="dropbtn btn btn-default" value="Start Search">
             </form>
-            <script>
-              $(document).ready(function(){
-                $.ajax({
-                    url: 'https://secure-forest-78791.herokuapp.com/sga/rso_names',
-                    method: 'GET',
-                    dataType: 'json',
-                    success: function(data){
-                      //console.log(data);
-                      for (key in data){
-                          var text = data[key]
-                          console.log(text);
-                          $('#RSO').append("<option>"+text+"</option>");
-                      }
-                    },
-                    error: function(jqXHR, textStatus, errorThrown){
-                      console.log(errorThrown);
-                    }
-                })
-              })
-
-              var searchforitem = document.getElementById('searchforitem')
-
-              searchforitem.onsubmit = async(e) => {
-                e.preventDefault();
-
-                var formData = new FormData(searchforitem)
-              
-                formData.append("RSO", $('#selectedRSO').val())
-
-                let response = await fetch('https://secure-forest-78791.herokuapp.com/sga/itemsearch.html', {
-                    method: 'POST',
-                    body: formData
-                })
-                
-                let result = await response.json()
-                    
-                alert(result.body, null)
-              }
-            </script>
         </div>
-   
+      </div>
+  
+      <script>
+        $(document).ready(function(){
+          $.ajax({
+              url: 'https://secure-forest-78791.herokuapp.com/sga/rso_names',
+              method: 'GET',
+              dataType: 'json',
+              success: function(data){
+                //console.log(data);
+                for (key in data){
+                    var text = data[key]
+                    console.log(text);
+                    $('#RSO').append("<option>"+text+"</option>");
+                }
+              },
+              error: function(jqXHR, textStatus, errorThrown){
+                console.log(errorThrown);
+              }
+          })
+        })
+
+        var searchforitem = document.getElementById('searchforitem')
+
+        searchforitem.onsubmit = async(e) => {
+          e.preventDefault();
+
+          var formData = new FormData(searchforitem)
+        
+          formData.append("RSO", $('#selectedRSO').val())
+
+          let response = await fetch('https://secure-forest-78791.herokuapp.com/sga/itemsearch.html', {
+              method: 'POST',
+              body: formData
+          })
+          
+          let result = await response.json()
+              
+          alert(result.body, null)
+        }
+      </script>
   <div class="footer">
     <hr width="80%">
       <p> Missouri Western State University <br>

@@ -55,7 +55,9 @@ router.get("/sga/rso_names", (req, res) => {
 })
 
 router.post("/sga/itemsearch.html", (req, res) => {
-  
+  for (i in req.fields)
+    console.log(i)
+    
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.send(JSON.stringify({body: 'Searched'}))
 })
