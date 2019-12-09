@@ -241,7 +241,7 @@
             .then(data => { 
               console.log(data);
 
-              if (result.body.length > 0){
+              if (data.length > 0){
                 searchforitem.style.visibility = 'hidden';
                 returnTable.style.visibility = 'visible';
                 for (i in result.body){
