@@ -56,15 +56,10 @@ router.get("/sga/rso_names", (req, res) => {
 
 })
 
-<<<<<<< HEAD
 router.post("/login", (req, res) => {
   res.render('admindashboard.html')
 })
 
-router.post("/sga/additem.html", (req, res) => {
-  var host = req.get('host');
- 
-=======
 router.post("/sga/itemsearch.html", (req, res) => {
   
   var tbl = []
@@ -101,7 +96,6 @@ router.post("/sga/itemsearch.html", (req, res) => {
 })
 
 router.post("/sga/additem.html", (req, res) => { 
->>>>>>> c6b3beaf470b0265f032a81b1a29cd36a502b051
   var picture = req.files["itempicture"];
   var number = req.fields["tagnum"];
   var noanum = req.fields["noanum"];
