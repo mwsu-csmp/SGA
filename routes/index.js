@@ -62,7 +62,7 @@ router.post("/sga/itemsearch.html", (req, res) => {
   tbl['itemname'] = 'ITEM_NAME'
   tbl['RSO'] = 'RSO_NAME'
 
-  var sql = "SELECT * FROM INVENTORY WHERE ";
+  var sql = "SELECT TAG_NUM, ITEM_NAME FROM INVENTORY WHERE ";
   for (i in req.fields){
     if (req.fields[i] !== ''){
       sql += (tbl[i] + " = " + mysql.escape(req.fields[i]))
@@ -71,10 +71,22 @@ router.post("/sga/itemsearch.html", (req, res) => {
 
   console.log(sql)
 
-  //connection.query()
+  connection.query(mysql, (err, results, fields) => {
+    if (err) {
+      console.log('error')
+      res.setHeader("Access-Control-Allow-Origin", "*");
+      res.send(JSON.stringify({body: "Error"}))
+    } else {
+      var tbl = []
 
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.send(JSON.stringify({body: 'Searched'}))
+      for (i in results){
+        tbl[i] = [results[i].TAG_NUM, results[i].ITEM_NAME]
+      }
+      
+      res.setHeader("Access-Control-Allow-Origin", "*");
+      res.send(JSON.stringify(tbl))
+    }
+  })
 })
 
 router.post("/sga/additem.html", (req, res) => { 
