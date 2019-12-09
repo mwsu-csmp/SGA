@@ -83,7 +83,7 @@ router.post("/sga/itemsearch.html", (req, res) => {
       var tbl = []
 
       for (i in results){
-        tbl[i] = [results[i].TAG_NUM, results[i].ITEM_NAME]
+        tbl[i] = [results[i].TAG_NUM, results[i].ITEM_NAME, results[i].RSO_NAME, results[i].RSO_ADVISOR]
       }
       
       res.send(JSON.stringify({body: tbl}))
