@@ -31,9 +31,12 @@ router.get("/sga/itemsearch.html", (req, res) => {
 })
 
 router.get("/sga/additem.html", (req, res) => {
-  console.log("Requested additem page")
   res.render('additem.html')
 });
+
+router.get('/sga/updateinventory.html', (req, res) => {
+  res.render('updateinventory.html')
+})
 
 router.get("/sga/rso_names", (req, res) => {
   
