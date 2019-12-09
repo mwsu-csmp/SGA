@@ -240,8 +240,7 @@
           }).then(response => response.json())
             .then(data => { 
               console.log(data.body);
-
-              if (data.body.length > 0){
+              if (!(typeof data.body === "string" || data.body instanceof String) && data.body.length > 0){
                 searchforitem.style.visibility = 'hidden';
                 returnTable.style.visibility = 'visible';
                 for (i in data.body){
@@ -252,6 +251,8 @@
                   str += "\n</tr>"
                   $("#returnTable tbody").append(str)
                 }
+              } else {
+                alert(data.body)
               }
             })
         }
