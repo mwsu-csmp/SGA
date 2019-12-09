@@ -7,9 +7,9 @@ if (port == null || port == "") {
   port = 8000;
 }
 
-app.set('views', __dirname + '/public');
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'public'));
 
 app.listen(port,() => {
   console.log(`Express is running on port ${port}`);

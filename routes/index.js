@@ -26,9 +26,17 @@ router.get("/sga", (req, res) => {
   res.render('admindashboard.html')
 })
 
+router.get("/sga/itemsearch.html", (req, res) => {
+  res.render('itemsearch.html')
+})
+
 router.get("/sga/additem.html", (req, res) => {
   res.render('additem.html')
 });
+
+router.get('/sga/updateinventory.html', (req, res) => {
+  res.render('updateinventory.html')
+})
 
 router.get("/sga/rso_names", (req, res) => {
   
@@ -42,13 +50,13 @@ router.get("/sga/rso_names", (req, res) => {
         tbl[i] = results[i].RSO_NAME
       }
       
-      res.setHeader("Access-Control-Allow-Origin", "*");
       res.send(JSON.stringify(tbl))
     }
   })
 
 })
 
+<<<<<<< HEAD
 router.post("/login", (req, res) => {
   res.render('admindashboard.html')
 })
@@ -56,6 +64,44 @@ router.post("/login", (req, res) => {
 router.post("/sga/additem.html", (req, res) => {
   var host = req.get('host');
  
+=======
+router.post("/sga/itemsearch.html", (req, res) => {
+  
+  var tbl = []
+
+  tbl['tnum'] = 'i.TAG_NUM'
+  tbl['itemname'] = 'i.ITEM_NAME'
+  tbl['RSO'] = 'i.RSO_NAME'
+
+  var sql = "SELECT i.TAG_NUM, i.ITEM_NAME, i.RSO_NAME, r.RSO_ADVISOR FROM INVENTORY i LEFT JOIN RSO r on i.RSO_NAME = r.RSO_NAME WHERE ";
+  for (i in req.fields){
+    if (req.fields[i] !== ''){
+      sql += (tbl[i] + " = " + mysql.escape(req.fields[i]))
+    }
+  }
+
+  connection.query(sql, (err, results, fields) => {
+    if (err) {
+      if (err.code !== 'ER_PARSE_ERROR'){
+        for (i in err)
+          console.log(i, err[i])
+        
+        res.send(JSON.stringify({body: "Error"}))
+      } else res.send(JSON.stringify({body: "No valid input"}))
+    } else {
+      var tbl = []
+
+      for (i in results){
+        tbl[i] = [results[i].TAG_NUM, results[i].ITEM_NAME, results[i].RSO_NAME, results[i].RSO_ADVISOR]
+      }
+      
+      res.send(JSON.stringify({body: tbl}))
+    }
+  })
+})
+
+router.post("/sga/additem.html", (req, res) => { 
+>>>>>>> c6b3beaf470b0265f032a81b1a29cd36a502b051
   var picture = req.files["itempicture"];
   var number = req.fields["tagnum"];
   var noanum = req.fields["noanum"];
@@ -82,10 +128,8 @@ router.post("/sga/additem.html", (req, res) => {
 
   connection.query(sql, [tbl], (err) => {
     if (err) {
-      res.setHeader("Access-Control-Allow-Origin", "*");
       res.send(JSON.stringify({body: 'Error: ' + err.stack}))
     } else {
-      res.setHeader("Access-Control-Allow-Origin", "*");
       res.send(JSON.stringify({body: 'Inserted item into item table'}))
     } 
   });

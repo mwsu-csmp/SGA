@@ -20,7 +20,7 @@
     overflow: hidden;
     display: block;
     position: relative;
-    padding-bottom: 100px;
+    padding-bottom: 400px;
   }
   .header {
     background-color: #000;
@@ -44,6 +44,11 @@
     font-size: 16;
   }
 */
+  .btn {        
+    font-size: 15px;
+    color: white;
+    background-color: #1d1d1d;
+  }
   .footer {
     position: absolute;
     bottom: 0;
@@ -54,6 +59,12 @@
     color: black;
     text-align: center;
     font-size: 11;
+  }
+  hr {
+    border: 0;
+    height: 1px;
+    background: #333;
+    background-image: linear-gradient(to right, #ccc, #333, #ccc);
   }
 </style>
 <div class="main-container">
@@ -76,52 +87,45 @@
     <div class="jumbotron">
         <div class="container">
             <h1 class="display-3">Admin Dashboard</h1>
-            <p>Here is where i will write some random text about the admin dashboard.</p>
+            <p>Welcome to the Admin Dashboard where you have full access to all the available functions.</p>
         </div>
     </div>
     
     <div class="container">
         <div class="row">
             <div class="col-md-4">
-                <h2>Inventory Check</h2>
-                <p>Some random text about inventory check.</p>
-                <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+                <h2>Add Item</h2>
+                <p>Add an item to the inventory.</p>
+                <p><a class="btn btn-default" href="https://secure-forest-78791.herokuapp.com/sga/additem.html" role="button">Proceed &raquo;</a></p>
             </div>
             <div class="col-md-4">
-                <h2>Item Search</h2>
-                <p>Some random text about item searching.</p>
-                <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+                <h2>Update Inventory</h2>
+                <p>Update or Archive an item already in the inventory.</p>
+                <p><a class="btn btn-default" href="https://secure-forest-78791.herokuapp.com/sga/updateinventory.html" role="button">Proceed &raquo;</a></p>
+            </div>
+            <div class="col-md-4">
+                <h2>Inventory Search</h2>
+                <p>Search specifically through all items in the inventory.</p>
+                <p><a class="btn btn-default" href="https://secure-forest-78791.herokuapp.com/sga/itemsearch.html" role="button">Proceed &raquo;</a></p>
+            </div>
+            <div class="col-md-4">
+                <h2>Inventory Check</h2>
+                <p>Check on the available inventory.</p>
+                <p><a class="btn btn-default" href="#" role="button">Proceed &raquo;</a></p>
             </div>
             <div class="col-md-4">
                 <h2>Run Reports</h2>
-                <p>Some random text about running reports.</p>
-                <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+                <p>Run reports of different kinds on the available dataset.</p>
+                <p><a class="btn btn-default" href="#" role="button">Proceed &raquo;</a></p>
             </div>
             <div class="col-md-4">
-                <h2>Add RSO</h2>
-                <p>Some random text about adding rso.</p>
-                <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
-            </div>
-            <div class="col-md-4">
-                <h2>Add Item</h2>
-                <p>Some random text about adding items.</p>
-                <p><a class="btn btn-default" id ="additem" role="button">View details &raquo;</a></p>
+                <h2>Add/Update RSO</h2>
+                <p>Create an account and give it RSO verification or Update a current existing one.</p>
+                <p><a class="btn btn-default" href="#" role="button">Proceed &raquo;</a></p>
             </div>
         </div>
-        <hr>
-      </div>
-      <script>
-        $('#additem').click = () => {
-          $.ajax({
-            method: 'GET',
-            url: 'https://secure-forest-78791.herokuapp.com/sga/additem.html',
-
-            success: function(){
-
-            }
-          })
-        }
-      </script>
+    </div>
+ 
   <div class="footer">
     <hr width="80%">
       <p> Missouri Western State University <br>
