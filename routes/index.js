@@ -50,7 +50,6 @@ router.get("/sga/rso_names", (req, res) => {
         tbl[i] = results[i].RSO_NAME
       }
       
-      res.setHeader("Access-Control-Allow-Origin", "*");
       res.send(JSON.stringify(tbl))
     }
   })
@@ -119,10 +118,8 @@ router.post("/sga/additem.html", (req, res) => {
 
   connection.query(sql, [tbl], (err) => {
     if (err) {
-      res.setHeader("Access-Control-Allow-Origin", "*");
       res.send(JSON.stringify({body: 'Error: ' + err.stack}))
     } else {
-      res.setHeader("Access-Control-Allow-Origin", "*");
       res.send(JSON.stringify({body: 'Inserted item into item table'}))
     } 
   });
