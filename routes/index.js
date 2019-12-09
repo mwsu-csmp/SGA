@@ -27,6 +27,7 @@ router.get("/sga", (req, res) => {
 })
 
 router.get("/sga/additem.html", (req, res) => {
+  console.log("Requested additem page")
   res.render('additem.html')
 });
 
@@ -49,9 +50,11 @@ router.get("/sga/rso_names", (req, res) => {
 
 })
 
-router.post("/sga/additem.html", (req, res) => {
-  var host = req.get('host');
- 
+router.post("/sga/itemsearch.html", (req, res) => {
+
+})
+
+router.post("/sga/additem.html", (req, res) => { 
   var picture = req.files["itempicture"];
   var number = req.fields["tagnum"];
   var noanum = req.fields["noanum"];
