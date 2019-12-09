@@ -105,17 +105,17 @@
             <div class="col-md-4">
                 <h2>Add Item</h2>
                 <p>Some random text about adding items.</p>
-                <p><a class="btn btn-default" id ="additem" role="button">View details &raquo;</a></p>
+                <p><a class="btn btn-default" id ="additem" onclick="add_item_page()" role="button">View details &raquo;</a></p>
             </div>
         </div>
         <hr>
       </div>
       <script>
-        $('#additem').click = () => {
+        function add_item_page(){
           $.ajax({
             method: 'GET',
             url: 'https://secure-forest-78791.herokuapp.com/sga/additem.html',
-
+            data: 'json',
             success: function(){
 
             }
