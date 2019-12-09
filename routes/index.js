@@ -73,7 +73,9 @@ router.post("/sga/itemsearch.html", (req, res) => {
 
   connection.query(mysql, (err, results, fields) => {
     if (err) {
-      console.log(err.stack)
+      for (i in err)
+        console.log(i, err[i])
+        
       res.setHeader("Access-Control-Allow-Origin", "*");
       res.send(JSON.stringify({body: "Error"}))
     } else {
