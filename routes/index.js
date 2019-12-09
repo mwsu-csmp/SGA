@@ -49,6 +49,10 @@ router.get("/sga/rso_names", (req, res) => {
 
 })
 
+router.post("/login", (req, res) => {
+  res.render('admindashboard.html')
+})
+
 router.post("/sga/additem.html", (req, res) => {
   var host = req.get('host');
  
