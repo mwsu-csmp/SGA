@@ -9,8 +9,6 @@
 <link rel="shortcut icon" type="image/png" href="https://i.imgur.com/uNjEIJ5.png"/>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
-<script type="text/javascript" src="jquery-3.3.1.js"></script>
-<script src="js/additem.js"></script>
 <style type="text/css">
   html,
   body {
@@ -226,7 +224,7 @@
           
           let result = await response.json()
               
-          if (!result.body.length > 0){
+          if (result.body.length > 0){
             alert(result.body, null)
             searchforitem.stlyle.visibility = "hidden";
           }
