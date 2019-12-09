@@ -55,8 +55,6 @@ router.get("/sga/rso_names", (req, res) => {
 })
 
 router.post("/sga/itemsearch.html", (req, res) => {
-  for (i in req.fields)
-    console.log(i, req.fields[i])
   
   var tbl = []
 
@@ -66,8 +64,12 @@ router.post("/sga/itemsearch.html", (req, res) => {
 
   var sql = "SELECT * FROM INVENTORY WHERE ";
   for (i in req.fields){
-
+    if (req.fields[i] !== ''){
+      sql += (tbl[i] + " = " + req.fields[i])
+    }
   }
+
+  console.log(sql)
 
   //connection.query()
 
