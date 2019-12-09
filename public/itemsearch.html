@@ -186,15 +186,17 @@
             </form>
         </div>
       </div>
-      <div class= "container">
-          <table id = "returnTable">
-              <tr>
-                <th>Tag Number</th>
-                <th>Item Name</th>
-                <th>Advisor Name</th>
-                <th>Assigned RSO</th>
-              </tr>
-            </table>
+      <div class="container-fluid"></div>
+        <div class= "container">
+            <table id = "returnTable">
+                <tr>
+                  <th>Tag Number</th>
+                  <th>Item Name</th>
+                  <th>Advisor Name</th>
+                  <th>Assigned RSO</th>
+                </tr>
+              </table>
+        </div>
       </div>
   
       <script>
@@ -241,15 +243,14 @@
             alert(result.body, null)
             searchforitem.style.visibility = 'hidden';
             returnTable.style.visibility = 'visible';
-            var str = "";
             for (i in result.body){
-              str += "<tr>"
-              for(s in i){
+              var str = "<tr>"
+              for(s in result.body[i]){
                 str += "<th>" + s + "</th>"
               }
               str += "</tr>"
+              returnTable.append(str)
             }
-            returnTable.append(str)
           }
         }
       </script>
