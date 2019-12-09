@@ -234,30 +234,26 @@
         
           formData.append("RSO", $('#selectedRSO').val())
 
-          let response = await fetch('https://secure-forest-78791.herokuapp.com/sga/itemsearch.html', {
+          fetch('https://secure-forest-78791.herokuapp.com/sga/itemsearch.html', {
               method: 'POST',
               body: formData
-          })
-          
-          let result = await response.json()
-            .then(body => {
-              console.log(body)
-            })
+          }).then(response => response.json())
+            .then(data => { 
+              console.log(data);
 
-          console.log(response.body)
-
-          if (result.body.length > 0){
-            searchforitem.style.visibility = 'hidden';
-            returnTable.style.visibility = 'visible';
-            for (i in result.body){
-              var str = "<tr>\n"
-              for(s in result.body[i]){
-                str += "<th> " + result.body[i][s] + " </th>\n"
+              if (result.body.length > 0){
+                searchforitem.style.visibility = 'hidden';
+                returnTable.style.visibility = 'visible';
+                for (i in result.body){
+                  var str = "<tr>\n"
+                  for(s in result.body[i]){
+                    str += "<th> " + result.body[i][s] + " </th>\n"
+                  }
+                  str += "\n</tr>"
+                  $("#returnTable tbody").append(str)
+                }
               }
-              str += "\n</tr>"
-              $("#returnTable tbody").append(str)
-            }
-          }
+            })
         }
       </script>
   <div class="footer">
