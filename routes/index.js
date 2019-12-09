@@ -60,9 +60,9 @@ router.post("/sga/itemsearch.html", (req, res) => {
   
   var tbl = []
 
-  tbl['tnum'] = 'TAG_NUM'
-  tbl['itemname'] = 'ITEM_NAME'
-  tbl['RSO'] = 'RSO_NAME'
+  tbl['tnum'] = 'i.TAG_NUM'
+  tbl['itemname'] = 'i.ITEM_NAME'
+  tbl['RSO'] = 'i.RSO_NAME'
 
   var sql = "SELECT i.TAG_NUM, i.ITEM_NAME, i.RSO_NAME, r.RSO_ADVISOR FROM INVENTORY i LEFT JOIN RSO r on i.RSO_NAME = r.RSO_NAME WHERE ";
   for (i in req.fields){
