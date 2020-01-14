@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const mysql = require('mysql');
-
+//Adding a comment so that I can commit
 const connection = mysql.createConnection({
   host: 'noynaert.cs.missouriwestern.edu',
   user: 'sga',
