@@ -17,7 +17,7 @@ connection.connect(function(err){
     console.log('Successfully connected!')
   }
 });
-
+//Testing again
 router.get("/", (req, res) => {
   res.render("index.html")
 })
