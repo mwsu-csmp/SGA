@@ -50,10 +50,11 @@
     bottom: 0;
     width: 100%;
     left: 0;
+    width: 100%;
     background-color: white;
     color: black;
     text-align: center;
-    font-size: 11px;
+    font-size: 11;
   }
   hr {
     border: 0;
@@ -148,6 +149,7 @@
   }
   
 </style>
+</style>
 <div class="main-container">
   <div class="header">
     <div class="headerlogo">
@@ -155,7 +157,6 @@
       <img src="https://www.missouriwestern.edu/student-life/wp-content/uploads/2017/09/mwsulogo3.png" alt="Missouri Western State University">
       </a>
     </div>
-  </div>
 <!--
     <div class="headerextras">
       <a href="https://www.missouriwestern.edu/student-life/student-government-association/" target="_blank" style="color:#fec20a;">SGA Page
@@ -203,8 +204,8 @@
       </div>
   
       <script>
-        var searchforitem = document.getElementById('searchforitem');
-        var returnTable = document.getElementById('returnTable');
+        var searchforitem = document.getElementById('searchforitem')
+        var returnTable = document.getElementById('returnTable')
 
         $(document).ready(function(){
           returnTable.style.visibility = 'hidden';
@@ -217,7 +218,7 @@
               success: function(data){
                 //console.log(data);
                 for (key in data){
-                    var text = data[key];
+                    var text = data[key]
                     $('#RSO').append("<option>"+text+"</option>");
                 }
               },
@@ -225,14 +226,14 @@
                 console.log(errorThrown);
               }
           })
-        });
+        })
 
         searchforitem.onsubmit = async(e) => {
           e.preventDefault();
 
-          var formData = new FormData(searchforitem);
+          var formData = new FormData(searchforitem)
         
-          formData.append("RSO", $('#selectedRSO').val());
+          formData.append("RSO", $('#selectedRSO').val())
 
           fetch('https://secure-forest-78791.herokuapp.com/sga/itemsearch.html', {
               method: 'POST',
@@ -244,11 +245,11 @@
                 searchforitem.style.visibility = 'hidden';
                 returnTable.style.visibility = 'visible';
                 for (i in data.body){
-                  var str = "<tr>\n";
+                  var str = "<tr>\n"
                   for(s in data.body[i]){
                     str += "<th> " + data.body[i][s] + " </th>\n"
                   }
-                  str += "\n</tr>";
+                  str += "\n</tr>"
                   $("#returnTable tbody").append(str)
                 }
               } else {

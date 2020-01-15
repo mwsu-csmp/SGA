@@ -128,7 +128,7 @@ router.post("/sga/additem.html", (req, res) => {
   //A variable to hold all the information gathered from the method above
   var tbl = [
     [picture,number,noanum,name,desc,manuname,modnum,sernum,condition,sellname,purdate,purprice,warr,warrenddate,foccategory,storloc,rso]
-  ]
+  ];
     //Variable to hold the SQL statement necessary to insert an item into the Database
   var sql = "INSERT INTO INVENTORY(ITEM_PIC, TAG_NUM, NOA_NUM, ITEM_NAME, ITEM_DESC, MANUFACT_NAME, MODEL_NUM, SERIAL_NUM, ITEM_COND, SELLER_NAME, PUR_DATE, PUR_PRICE, WARRANTY, WAR_END_DATE, FOC_CAT, STORE_LOCAL, RSO_NAME) VALUES ?";
 
