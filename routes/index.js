@@ -9,7 +9,7 @@ const connection = mysql.createConnection({
   password: 'sgaPassword',
   database: 'sga',
   multipleStatements: true
-})
+});
 
 //Connecting to the database and returning an error if unsuccessful.
 connection.connect(function(err){
@@ -23,17 +23,17 @@ connection.connect(function(err){
 //fetch and render the Index page where users login
 router.get("/", (req, res) => {
   res.render("index.html")
-})
+});
 
 //Fetch and render the admin Dashboard page
 router.get("/sga", (req, res) => {
   res.render('admindashboard.html')
-})
+});
 
 //Fetch and render the item search page
 router.get("/sga/itemsearch.html", (req, res) => {
   res.render('itemsearch.html')
-})
+});
 
 //Fetch and render the add item page
 router.get("/sga/additem.html", (req, res) => {
@@ -43,7 +43,7 @@ router.get("/sga/additem.html", (req, res) => {
 //Fetch and render the add item page
 router.get('/sga/updateinventory.html', (req, res) => {
   res.render('updateinventory.html')
-})
+});
 
 //Fetch and render the name of RSO's so they can be searched from in add item
 router.get("/sga/rso_names", (req, res) => {
@@ -52,7 +52,7 @@ router.get("/sga/rso_names", (req, res) => {
     if (err) {
       console.log('error')
     } else {
-      var tbl = []
+      var tbl = [];
 
       for (i in results){
         tbl[i] = results[i].RSO_NAME
@@ -62,21 +62,21 @@ router.get("/sga/rso_names", (req, res) => {
     }
   })
 
-})
+});
 
 
 router.post("/login", (req, res) => {
   res.render('admindashboard.html')
-})
+});
 
 //Function to search for items
 router.post("/sga/itemsearch.html", (req, res) => {
 
-  var tbl = []
+  var tbl = [];
 
-  tbl['tnum'] = 'i.TAG_NUM'
-  tbl['itemname'] = 'i.ITEM_NAME'
-  tbl['RSO'] = 'i.RSO_NAME'
+  tbl['tnum'] = 'i.TAG_NUM';
+  tbl['itemname'] = 'i.ITEM_NAME';
+  tbl['RSO'] = 'i.RSO_NAME';
 
   var sql = "SELECT i.TAG_NUM, i.ITEM_NAME, i.RSO_NAME, r.RSO_ADVISOR FROM INVENTORY i LEFT JOIN RSO r on i.RSO_NAME = r.RSO_NAME WHERE ";
   for (i in req.fields){
@@ -89,12 +89,12 @@ router.post("/sga/itemsearch.html", (req, res) => {
     if (err) {
       if (err.code !== 'ER_PARSE_ERROR'){
         for (i in err)
-          console.log(i, err[i])
+          console.log(i, err[i]);
         
         res.send(JSON.stringify({body: "Error"}))
       } else res.send(JSON.stringify({body: "No valid input"}))
     } else {
-      var tbl = []
+      var tbl = [];
 
       for (i in results){
         tbl[i] = [results[i].TAG_NUM, results[i].ITEM_NAME, results[i].RSO_NAME, results[i].RSO_ADVISOR]
@@ -103,7 +103,7 @@ router.post("/sga/itemsearch.html", (req, res) => {
       res.send(JSON.stringify({body: tbl}))
     }
   })
-})
+});
 
 //Function to gather all the information held within the fields of Add Item
 router.post("/sga/additem.html", (req, res) => { 
