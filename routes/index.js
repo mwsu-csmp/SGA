@@ -44,11 +44,11 @@ router.get("/sga/additem.html", (req, res) => {
 router.get('/sga/updateinventory.html', (req, res) => {
   res.render('updateinventory.html')
 });
-
+//Fetch and Render Update RSO page
 router.get('/sga/updaterso.html', (req, res) => {
   res.render('updaterso.html')
 });
-
+//Fetch and render add RSO page
 router.get('/sga/addrso.html', (req, res) => {
   res.render('addrso.html')
 });
