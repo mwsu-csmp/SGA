@@ -45,6 +45,14 @@ router.get('/sga/updateinventory.html', (req, res) => {
   res.render('updateinventory.html')
 });
 
+router.get('/sga/updaterso.html', (req, res) => {
+  res.render('updaterso.html')
+});
+
+router.get('/sga/addrso.html', (req, res) => {
+  res.render('addrso.html')
+});
+
 //Fetch and render the name of RSO's so they can be searched from in add item
 router.get("/sga/rso_names", (req, res) => {
   
