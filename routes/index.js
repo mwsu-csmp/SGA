@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const mysql = require('mysql');
-//Adding a comment so that I can commit
+
+//Constant Variable used to contain the Database connection issue.
 const connection = mysql.createConnection({
   host: 'noynaert.cs.missouriwestern.edu',
   user: 'sga',
@@ -10,6 +11,7 @@ const connection = mysql.createConnection({
   multipleStatements: true
 })
 
+//Connecting to the database and returning an error if unsuccessful.
 connection.connect(function(err){
   if (err) {
     console.log(err.stack);
@@ -17,27 +19,33 @@ connection.connect(function(err){
     console.log('Successfully connected!')
   }
 });
-//Testing again
+
+//fetch and render the Index page where users login
 router.get("/", (req, res) => {
   res.render("index.html")
 })
 
+//Fetch and render the admin Dashboard page
 router.get("/sga", (req, res) => {
   res.render('admindashboard.html')
 })
 
+//Fetch and render the item search page
 router.get("/sga/itemsearch.html", (req, res) => {
   res.render('itemsearch.html')
 })
 
+//Fetch and render the add item page
 router.get("/sga/additem.html", (req, res) => {
   res.render('additem.html')
 });
 
+//Fetch and render the add item page
 router.get('/sga/updateinventory.html', (req, res) => {
   res.render('updateinventory.html')
 })
 
+//Fetch and render the name of RSO's so they can be searched from in add item
 router.get("/sga/rso_names", (req, res) => {
   
   connection.query("SELECT RSO_NAME FROM RSO", (err, results, fields) => {
@@ -56,12 +64,14 @@ router.get("/sga/rso_names", (req, res) => {
 
 })
 
+
 router.post("/login", (req, res) => {
   res.render('admindashboard.html')
 })
 
+//Function to search for items
 router.post("/sga/itemsearch.html", (req, res) => {
-  
+
   var tbl = []
 
   tbl['tnum'] = 'i.TAG_NUM'
@@ -95,6 +105,7 @@ router.post("/sga/itemsearch.html", (req, res) => {
   })
 })
 
+//Function to gather all the information held within the fields of Add Item
 router.post("/sga/additem.html", (req, res) => { 
   var picture = req.files["itempicture"];
   var number = req.fields["tagnum"];
@@ -114,12 +125,14 @@ router.post("/sga/additem.html", (req, res) => {
   var foccategory = req.fields["foccategory"];
   var rso = req.fields["RSO"];
 
+  //A variable to hold all the information gathered from the method above
   var tbl = [
     [picture,number,noanum,name,desc,manuname,modnum,sernum,condition,sellname,purdate,purprice,warr,warrenddate,foccategory,storloc,rso]
   ]
-
+    //Variable to hold the SQL statement necessary to insert an item into the Database
   var sql = "INSERT INTO INVENTORY(ITEM_PIC, TAG_NUM, NOA_NUM, ITEM_NAME, ITEM_DESC, MANUFACT_NAME, MODEL_NUM, SERIAL_NUM, ITEM_COND, SELLER_NAME, PUR_DATE, PUR_PRICE, WARRANTY, WAR_END_DATE, FOC_CAT, STORE_LOCAL, RSO_NAME) VALUES ?";
 
+  //Inserting the value into the table.
   connection.query(sql, [tbl], (err) => {
     if (err) {
       res.send(JSON.stringify({body: 'Error: ' + err.stack}))

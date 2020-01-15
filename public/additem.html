@@ -1,6 +1,7 @@
+<!-- Add Item page, where a user can add an item -->
 <!DOCTYPE html>
 <html lang="en">
-   <head>
+    <head>
       <meta charset="utf-8">
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -53,7 +54,7 @@
          background-color: white;
          color: black;
          text-align: center;
-         font-size: 11;
+         font-size: 11px;
          }
          hr {
          border: 0;
@@ -132,7 +133,6 @@
          padding: 20px;
          }
       </style>
-      </style>
       <div class="main-container">
          <div class="header">
             <div class="headerlogo">
@@ -141,6 +141,7 @@
                </a>
             </div>
          </div>
+      </div>
    </head>
    <body>
    <div class="container-fluid">
@@ -215,7 +216,7 @@
             success: function(data){
                //console.log(data);
                for (key in data){
-                  var text = data[key]
+                  var text = data[key];
                   $('#RSO').append("<option>"+text+"</option>");
                }
             },
@@ -223,7 +224,7 @@
                console.log(errorThrown);
             }
          })
-      })
+      });
 
       var additemform = document.getElementById("additemform");
       var itempicture = document.getElementById("itempicture");
@@ -232,17 +233,17 @@
       additemform.onsubmit = async(e) => {
          e.preventDefault();
 
-         var formData = new FormData(additemform)
+         var formData = new FormData(additemform);
       
-         formData.append("itempicture", new Blob([itempicture.files[0]]))
-         formData.append("RSO", $('#selectedRSO').val())
+         formData.append("itempicture", new Blob([itempicture.files[0]]));
+         formData.append("RSO", $('#selectedRSO').val());
 
          let response = await fetch('https://secure-forest-78791.herokuapp.com/sga/additem.html', {
             method: 'POST',
             body: formData
-         })
+         });
          
-         let result = await response.json()
+         let result = await response.json();
             
          alert(result.body, null)
       }
