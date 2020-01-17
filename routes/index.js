@@ -52,6 +52,10 @@ router.get('/sga/updaterso.html', (req, res) => {
 router.get('/sga/addrso.html', (req, res) => {
   res.render('addrso.html')
 });
+//Fetch and render Search RSO page
+router.get('/sga/searchrso.html', (req, res) => {
+  res.render('searchrso.html')
+});
 
 //Fetch and render the name of RSO's so they can be searched from in add item
 router.get("/sga/rso_names", (req, res) => {
