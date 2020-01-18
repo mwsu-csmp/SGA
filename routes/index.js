@@ -162,13 +162,14 @@ router.post("/sga/addrso.html", (req, res) => {
   var number = req.fields["phonenum"];
   var email = req.fields["rsoemail"];
   var notes = req.fields["rsonotes"];
+  var active = 'Y';
 
 
   //Variable to hold all the information gathered.
-  var tbl =[[name, advisor, number, email, notes]];
+  var tbl =[[name, advisor, number, email, notes, active]];
 
   //Variable to hold the SQL Statement to insert an RSO
-  var sql = "INSERT INTO RSO(RSO_NAME, RSO_ADVISOR, ADVISOR_PHONE, ADVISOR_EMAIL, RSO_NOTES) VALUES ?";
+  var sql = "INSERT INTO RSO(RSO_NAME, RSO_ADVISOR, ADVISOR_PHONE, ADVISOR_EMAIL, RSO_NOTES, ACTIVE) VALUES ?";
 
   //Connecting to the database and supplying the query
   connection.query(sql, [tbl], (err) => {
