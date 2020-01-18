@@ -154,4 +154,28 @@ router.post("/sga/additem.html", (req, res) => {
   });
 });
 
-module.exports = router;
+//Function to handle add RSO
+//Grab fields entries
+router.post("/sga/addrso.html", (req, res) => {
+  var name = req.fields["rsoname"];
+  var advisor = req.fields["rsoadvisor"];
+  var number = req.fields["phonenum"];
+  var email = req.fields["rsoemail"];
+  var notes = req.fields["rsonotes"];
+
+  //Variable to hold all the information gathered.
+  var rsotbl =[[name, advisor, number, email, notes]];
+
+  //Variable to hold the SQL Statement to insert an RSO
+  var rsosql = "INSERT INTO RSO(RSO_NAME, RSO_ADVISOR, ADVISOR_PHONE, ADVISOR_EMAIL, ACTIVE, RSO_NOTES) VALUES ?";
+
+  //Connecting to the database and supplying the query
+  connection.query(rsosql, [rsotbl], (err) => {
+    if (err) {
+      res.send(JSON.stringify({body: 'Error: ' + err.stack}))
+    } else {
+      res.send(JSON.stringify({body: 'Inserted item into item table'}))
+    }
+  });
+});
+  module.exports = router;
