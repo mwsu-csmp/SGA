@@ -10,7 +10,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
 <script type="text/javascript" src="jquery-3.3.1.js"></script>
-<script src="../../../Documents/Programming/CSC-400:476/js/additem.js"></script>
+<script src="js/additem.js"></script>
 <style type="text/css">
   html,
   body {
@@ -118,7 +118,7 @@
     border-radius: 4px;
     box-sizing: border-box;
   }
-  
+
   input[type=submit] {
     width: 100%;
     color: white;
@@ -137,9 +137,9 @@
     border-radius: 5px;
     background-color: #f2f2f2;
     padding: 20px;
-    
+
   }
-  
+
 </style>
 </style>
 <div class="main-container">
@@ -167,7 +167,7 @@
     </div>
     <div class="container">
         <div class="row">
-            <div class="form">
+          <form id = "searchforrso">
                   <label for="rsoname">Search RSO Name</label>
                   <input type="text" id="rsoname" name="rsoname" placeholder="...">
                   <label for="rsoadvis">Search RSO Advisor</label>
@@ -180,12 +180,70 @@
                   <p><input type="text" id="active" name="active" placeholder="..."></p>
 
                   <input type="submit"  class="dropbtn btn btn-default" value="Search RSO">
-              </div>
-              </form>
+           </form>
         </div>
+     </div>
 
     </div>
-   
+
+
+    <script>
+        var searchforrso = document.getElementById('searchforrso')
+        var returnTable = document.getElementById('returnTable')
+
+        $(document).ready(function(){
+          returnTable.style.visibility = 'hidden';
+          searchforrso.style.visibility = 'visible';
+
+          $.ajax({
+              url: 'https://secure-forest-78791.herokuapp.com/sga/rso_names',
+              method: 'GET',
+              dataType: 'json',
+              success: function(data){
+                //console.log(data);
+                for (key in data){
+                    var text = data[key]
+                    $('#RSO').append("<option>"+text+"</option>");
+                }
+              },
+              error: function(jqXHR, textStatus, errorThrown){
+                console.log(errorThrown);
+              }
+          })
+        })
+
+        searchforrso.onsubmit = async(e) => {
+          e.preventDefault();
+
+          var formData = new FormData(searchforrso)
+
+          formData.append("RSO", $('#selectedRSO').val())
+
+          fetch('https://secure-forest-78791.herokuapp.com/sga/searchrso.html', {
+              method: 'POST',
+              body: formData
+          }).then(response => response.json())
+            .then(data => {
+              console.log(data.body);
+              if (!(typeof data.body === "string" || data.body instanceof String) && data.body.length > 0){
+                searchforrso.style.visibility = 'hidden';
+                returnTable.style.visibility = 'visible';
+                for (i in data.body){
+                  var str = "<tr>\n"
+                  for(s in data.body[i]){
+                    str += "<th> " + data.body[i][s] + " </th>\n"
+                  }
+                  str += "\n</tr>"
+                  $("#returnTable tbody").append(str)
+                }
+              } else {
+                alert(data.body)
+              }
+            })
+        }
+      </script>
+
+
   <div class="footer">
     <hr width="80%">
       <p> Missouri Western State University <br>
