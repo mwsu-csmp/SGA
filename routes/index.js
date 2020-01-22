@@ -108,6 +108,7 @@ router.post("/sga/searchrso.html", (req, res) => {
     } else {
       var tbl = [];
 
+      //Results and what to display
       for (i in results){
         tbl[i] = [results[i].RSO_NAME, results[i].RSO_ADVISOR, results[i].ITEM_NAME, results[i].TAG_NUM]
       }
