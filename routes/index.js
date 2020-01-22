@@ -89,7 +89,7 @@ router.post("/sga/searchrso.html", (req, res) => {
   tbl ['RSO_NAME'] = 'r.RSO_NAME';
   tbl ['RSO_ADVISOR'] = 'r.RSO_ADVISOR';
 
-  var sql = "SELECT r.RSO_NAME, r.RSO_ADVISOR FROM RSO r LEFT JOIN INVENTORY i ON r.RSO_NAME = i.RSO_NAME WHERE ";
+  var sql = "SELECT r.RSO_NAME, r.RSO_ADVISOR, i.ITEM_NAME, i.TAG_NUM FROM RSO r LEFT JOIN INVENTORY i ON r.RSO_NAME = i.RSO_NAME WHERE ";
   for (i in req.fields){
     if (req.fields[i] !== ''){
       sql += (tbl[i] + " = " + mysql.escape(req.fields[i]))
