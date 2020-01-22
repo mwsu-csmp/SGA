@@ -93,6 +93,7 @@ router.post("/sga/searchrso.html", (req, res) => {
   for (i in req.fields){
     if (req.fields[i] !== ''){
       sql += (tbl[i] + " = " + mysql.escape(req.fields[i]))
+      console.log(sql);
     }
   }
   connection.query(sql, (err, results, fields) => {
@@ -100,6 +101,7 @@ router.post("/sga/searchrso.html", (req, res) => {
       if (err.code !== 'ER_PARSE_ERROR'){
         for (i in err)
           console.log(i, err[i]);
+          console.log(err);
 
         res.send(JSON.stringify({body: "Error"}))
       } else res.send(JSON.stringify({body: "No valid input"}))
