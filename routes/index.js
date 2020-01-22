@@ -81,6 +81,42 @@ router.post("/login", (req, res) => {
   res.render('admindashboard.html')
 });
 
+//Function to search for RSO
+router.post("/sga/searchrso.html", (req, res) => {
+
+  var tbl = [];
+
+  tbl ['RSO'] = 'r.RSO_NAME';
+  tbl ['rsoadvisor'] = 'r.RSO_ADVISOR';
+  tbl ['rphonenum'] = 'r.ADVISOR_PHONE';
+  tbl ['remail'] = 'r.ADVISOR_EMAIL';
+  tbl ['rstatus'] = 'r.ACTIVE';
+
+  var sql = "SELECT r.RSO_NAME, r.RSO_ADVISOR, r.ADVISOR_PHONE, r.ADVISOR_EMAIL, r.ACTIVE FROM RSO r LEFT JOIN INVENTORY i ON i.RSO_NAME = r.RSO_NAME WHERE ";
+  for (i in req.fields){
+    if (req.fields[i] !== ''){
+      sql += (tbl[i] + " = " + mysql.escape(req.fields[i]))
+    }
+  }
+  connection.query(sql, (err, results, fields) => {
+    if (err) {
+      if (err.code !== 'ER_PARSE_ERROR'){
+        for (i in err)
+          console.log(i, err[i]);
+
+        res.send(JSON.stringify({body: "Error"}))
+      } else res.send(JSON.stringify({body: "No valid input"}))
+    } else {
+      var tbl = [];
+
+      for (i in results){
+        tbl[i] = [results[i].RSO_NAME, results[i].RSO_ADVISOR, results[i].ADVISOR_PHONE, results[i].ADVISOR_EMAIL]
+      }
+
+      res.send(JSON.stringify({body: tbl}))
+    }
+  })
+});
 //Function to search for items
 router.post("/sga/itemsearch.html", (req, res) => {
 
