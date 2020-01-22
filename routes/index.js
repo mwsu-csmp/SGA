@@ -107,7 +107,7 @@ router.post("/sga/searchrso.html", (req, res) => {
       var tbl = [];
 
       for (i in results){
-        tbl[i] = [results[i].RSO_NAME, results[i].RSO_ADVISOR]
+        tbl[i] = [results[i].RSO_NAME, results[i].RSO_ADVISOR, results[i].ITEM_NAME, results[i].TAG_NUM]
       }
 
       res.send(JSON.stringify({body: tbl}))
