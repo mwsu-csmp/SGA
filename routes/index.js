@@ -110,13 +110,14 @@ router.post("/sga/searchrso.html", (req, res) => {
       var tbl = [];
 
       for (i in results){
-        tbl[i] = [results[i].RSO_NAME, results[i].RSO_ADVISOR, results[i].ADVISOR_PHONE, results[i].ADVISOR_EMAIL]
+        tbl[i] = [results[i].RSO_NAME, results[i].RSO_ADVISOR, results[i].ADVISOR_PHONE, results[i].ADVISOR_EMAIL, results[i].ACTIVE]
       }
 
       res.send(JSON.stringify({body: tbl}))
     }
   })
 });
+
 //Function to search for items
 router.post("/sga/itemsearch.html", (req, res) => {
 
