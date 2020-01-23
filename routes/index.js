@@ -86,16 +86,14 @@ router.post("/sga/searchrso.html", (req, res) => {
 
   var tbl = [];
 
-  tbl ['RSO'] = 'r.RSO_NAME';
-  tbl ['rsoadvisor'] = 'r.RSO_ADVISOR';
-  tbl ['rphonenum'] = 'r.ADVISOR_PHONE';
-  tbl ['remail'] = 'r.ADVISOR_EMAIL';
-  tbl ['rstatus'] = 'r.ACTIVE';
+  tbl ['RSO_NAME'] = 'r.RSO_NAME';
+  tbl ['RSO_ADVISOR'] = 'r.RSO_ADVISOR';
 
-  var sql = "SELECT r.RSO_NAME, r.RSO_ADVISOR, r.ADVISOR_PHONE, r.ADVISOR_EMAIL, r.ACTIVE FROM RSO r LEFT JOIN INVENTORY i ON r.RSO_NAME = i.RSO_NAME WHERE ";
+  var sql = "SELECT r.RSO_NAME, r.RSO_ADVISOR, i.ITEM_NAME, i.TAG_NUM FROM RSO r LEFT JOIN INVENTORY i ON r.RSO_NAME = i.RSO_NAME WHERE ";
   for (i in req.fields){
     if (req.fields[i] !== ''){
       sql += (tbl[i] + " = " + mysql.escape(req.fields[i]))
+
     }
   }
   connection.query(sql, (err, results, fields) => {
@@ -104,13 +102,15 @@ router.post("/sga/searchrso.html", (req, res) => {
         for (i in err)
           console.log(i, err[i]);
 
+
         res.send(JSON.stringify({body: "Error"}))
       } else res.send(JSON.stringify({body: "No valid input"}))
     } else {
       var tbl = [];
 
+      //Results and what to display
       for (i in results){
-        tbl[i] = [results[i].RSO_NAME, results[i].RSO_ADVISOR, results[i].ADVISOR_PHONE, results[i].ADVISOR_EMAIL, results[i].ACTIVE]
+        tbl[i] = [results[i].RSO_NAME, results[i].RSO_ADVISOR, results[i].ITEM_NAME, results[i].TAG_NUM]
       }
 
       res.send(JSON.stringify({body: tbl}))
