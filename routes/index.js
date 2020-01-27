@@ -3,7 +3,7 @@ const router = express.Router();
 const mysql = require('mysql');
 
 //CSS
-//app.use(express.static(path.join(__dirname, '/public')));
+app.use(express.static(path.join(__dirname, '/public/css')));
 
 //Constant Variable used to contain the Database connection issue.
 const connection = mysql.createConnection({
