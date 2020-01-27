@@ -2,6 +2,9 @@ const express = require('express');
 const router = express.Router();
 const mysql = require('mysql');
 
+//CSS
+app.use(express.static(path.join(__dirname, '/public')));
+
 //Constant Variable used to contain the Database connection issue.
 const connection = mysql.createConnection({
   host: 'noynaert.cs.missouriwestern.edu',
