@@ -12,7 +12,8 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'public'));
 //app.use(express.static(path.join(__dirname, 'public')));
 //app.use(express.static(__dirname + '/public'));
-app.use('/css', express.static(__dirname + '/public'));
+//app.use('/css', express.static(__dirname + '/public'));
+app.use(express.static(path.join(process.env.PWD, 'public')))
 
 app.listen(port,() => {
   console.log(`Express is running on port ${port}`);
