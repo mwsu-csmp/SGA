@@ -1,15 +1,18 @@
 <!-- Add Item page, where a user can add an item -->
 <!DOCTYPE html>
 <html lang="en">
-   <head>
+    <head>
       <meta charset="utf-8">
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <title>Add Item</title>
+      <link rel="stylesheet" type="text/css" href="css/style.css">
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
       <link rel="shortcut icon" type="image/png" href="https://i.imgur.com/uNjEIJ5.png"/>
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+      <link rel="stylesheet" type="text/css" href="css/style.css">
+      <!--
       <style type="text/css">
          html,
          body {
@@ -134,15 +137,15 @@
          }
       </style>
       </style>
+      -->
       <div class="main-container">
          <div class="header">
             <div class="headerlogo">
                <a href="https://www.missouriwestern.edu/">
-               <img src="https://www.missouriwestern.edu/student-life/wp-content/uploads/2017/09/mwsulogo3.png" alt="Missouri Western State University">
-               </a>
+               <img src="https://www.missouriwestern.edu/student-life/wp-content/uploads/2017/09/mwsulogo3.png" alt="Missouri Western State University"></a>
             </div>
          </div>
-   </head>
+    </head>
    <body>
    <div class="container-fluid">
    <div class="jumbotron">
@@ -234,7 +237,7 @@
          e.preventDefault();
 
          var formData = new FormData(additemform)
-      
+
          formData.append("itempicture", new Blob([itempicture.files[0]]))
          formData.append("RSO", $('#selectedRSO').val())
 
@@ -242,9 +245,9 @@
             method: 'POST',
             body: formData
          })
-         
+
          let result = await response.json()
-            
+
          alert(result.body, null)
       }
    </script>
