@@ -73,7 +73,23 @@ router.get("/sga/rso_names", (req, res) => {
       res.send(JSON.stringify(tbl))
     }
   })
+});
 
+//Fetch and render RSO Information for Update RSO
+router.get("/sga/rso_information", (req, res) => {
+
+  connection.query("SELECT RSO_NAME, RSO_ADVISOR, ADVISOR_PHONE, ADVISOR_EMAIL, RSO_NOTES, ACTIVE",(err, results, fields) => {
+    if (err) {
+      console.log('error')
+    } else {
+      var tbl = [];
+
+      for (i in results) {
+        tbl[i] = [results[i].RSO_NAME, results[i].RSO_ADVISOR, results[i].ADVISOR_PHONE, results[i].ADVISOR_EMAIL, results[i].RSO_NOTES, results[i].ACTIVE]
+      }
+      res.send(JSON.stringify(tbl))
+    }
+  })
 });
 
 router.post("/login", (req, res) => {
