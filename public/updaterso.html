@@ -194,6 +194,76 @@
 
     </div>
 
+    <script>
+      $(document).ready(function(){
+         $.ajax({
+            url: 'https://secure-forest-78791.herokuapp.com/sga/rso_information',
+            method: 'GET',
+            dataType: 'json',
+            success: function(data){
+               //console.log(data);
+               for (key in data){
+                  var text = data[key]
+                  $('#RSO').append("<option>"+text+"</option>");
+               }
+            },
+            error: function(jqXHR, textStatus, errorThrown){
+               console.log(errorThrown);
+            }
+         })
+      })
+
+      var updaterso = document.getElementById('updaterso')
+      var returnTable = document.getElementById('returnTable')
+
+      $(document).ready(function(){
+        returnTable.style.visibility = 'hidden';
+        updaterso.style.visibility = 'visible';
+
+        $.ajax({
+            url: 'https://secure-forest-78791.herokuapp.com/sga/rso_information',
+            method: 'GET',
+            dataType: 'json',
+            success: function(data){
+              //console.log(data);
+              for (key in data){
+                  var text = data[key]
+              }
+            },
+            error: function(jqXHR, textStatus, errorThrown){
+              console.log(errorThrown);
+            }
+        })
+      })
+
+      updaterso.onsubmit = async(e) => {
+        e.preventDefault();
+
+        var formData = new FormData(updaterso)
+        fetch('https://secure-forest-78791.herokuapp.com/sga/updaterso.html', {
+            method: 'POST',
+            body: formData
+        }).then(response => response.json())
+          .then(data => {
+            console.log(data.body);
+            if (!(typeof data.body === "string" || data.body instanceof String) && data.body.length > 0){
+              updaterso.style.visibility = 'hidden';
+              returnTable.style.visibility = 'visible';
+              for (i in data.body){
+                var str = "<tr>\n"
+                for(s in data.body[i]){
+                  str += "<th> " + data.body[i][s] + " </th>\n"
+                }
+                str += "\n</tr>"
+                $("#returnTable tbody").append(str)
+              }
+            } else {
+              alert(data.body)
+            }
+          })
+      }
+    </script>
+
   <div class="footer">
     <hr width="80%">
       <p> Missouri Western State University <br>
