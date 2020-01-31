@@ -139,6 +139,30 @@
     padding: 20px;
 
   }
+  .searchButton {
+	box-shadow:inset 0px 1px 0px 0px #fff6af;
+	background:linear-gradient(to bottom, #ffec64 5%, #ffc124 100%);
+	background-color:#ffec64;
+	border-radius:6px;
+	border:1px solid #ffdb24;
+	display:inline-block;
+	cursor:pointer;
+	color:#000000;
+	font-family:Arial;
+	font-size:15px;
+	font-weight:bold;
+	padding:6px 24px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #ffee66;
+}
+.searchButton:hover {
+	background:linear-gradient(to bottom, #ffc124 5%, #ffec64 100%);
+	background-color:#ffc124;
+}
+.searchButton:active {
+	position:relative;
+	top:1px;
+}
 
 </style>
 </style>
@@ -168,12 +192,14 @@
     <div class="container">
             <div class="row">
                 <form id = "updaterso">
-                    <label for="RSO_NAME">Search RSO</label>
+                    <label for="RSO_NAME">Select RSO</label>
                     <p><input id="RSO_NAME" name = "RSO_NAME" list="RSO" placeholder="Search">
                     <datalist id="RSO">
-                    </datalist></p>
+                    </datalist>
+                    <a href="#" class="selectButton">Select</a></p>
+
                     <label for="rsoname">RSO Name</label>
-                    <input type="text" id="rsoname" name="rsoname" placeholder="..." value="{rsoname}">
+                    <input type="text" id="rsoname" name="rsoname" placeholder="..." value={RSO_NAME}>
                     <label for="rsoadvis">RSO Advisor</label>
                     <input type="text" id="rsoadvis" name="rsoadvisor" placeholder="...">
                     <p><label for="advphnum">Advisor Phone Number</label>
@@ -227,7 +253,7 @@
          })
       })
 
-      var updaterso = document.getElementById('searchforrso')
+      var updaterso = document.getElementById('updateforrso')
       var returnTable = document.getElementById('returnTable')
 
       $(document).ready(function(){
