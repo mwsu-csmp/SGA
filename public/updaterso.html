@@ -169,11 +169,11 @@
             <div class="row">
                 <form id = "updaterso">
                     <label for="RSO_NAME">Search RSO</label>
-                    <p><input id="RSO_NAME" name = "RSO_NAME" list="RSO" placeholder="Search" select id="searchrso">
+                    <p><input id="RSO_NAME" name = "RSO_NAME" list="RSO" placeholder="Search">
                     <datalist id="RSO">
                     </datalist></p>
                     <label for="rsoname">RSO Name</label>
-                    <input type="text" id="rsoname" name="rsoname" placeholder="..." value="{rsoname}" onchange="updateText('searchrso')">
+                    <input type="text" id="rsoname" name="rsoname" placeholder="..." value="{rsoname}">
                     <label for="rsoadvis">RSO Advisor</label>
                     <input type="text" id="rsoadvis" name="rsoadvisor" placeholder="...">
                     <p><label for="advphnum">Advisor Phone Number</label>
@@ -208,30 +208,7 @@
         </div>
     </div>
 
-    <form id="example" name="example">
-        <select id="sensor" onchange="updateText('sensor')">
-        <option value="J">J</option>
-        <option value="K">K</option>
-    </select>
-
-    <select id="voltage" onchange="updateText('voltage')">
-        <option value="120V">120V</option>
-        <option value="240V">240V</option>
-    </select>
-
-    <br />
-    <input type="text" value="" id="sensorText" /> <input type="text" value="" id="voltageText" />
-    </form>
-
-
-
-
     <script>
-      function updateText(type) {
-        var id = type+'Text';
-        document.getElementById(id).value = document.getElementById(type).value;
-      }
-
       $(document).ready(function(){
          $.ajax({
             url: 'https://secure-forest-78791.herokuapp.com/sga/rso_names',
@@ -250,7 +227,7 @@
          })
       })
 
-      var updaterso = document.getElementById('updaterso')
+      var updaterso = document.getElementById('searchforrso')
       var returnTable = document.getElementById('returnTable')
 
       $(document).ready(function(){
