@@ -139,30 +139,6 @@
     padding: 20px;
 
   }
-  .selectButton {
-  box-shadow:inset 0px 0px 0px 0px #fff6af;
-	background:linear-gradient(to bottom, #ffec64 5%, #ffc124 100%);
-	background-color:#ffec64;
-	border:1px solid #ffc400;
-	display:inline-block;
-	cursor:pointer;
-	color:#000000;
-	font-family:Arial;
-	font-size:12px;
-	font-weight:bold;
-	padding:4px 8px;
-	text-decoration:none;
-	text-shadow:0px 1px 0px #ffee66;
-}
-.selectButton:hover {
-	background:linear-gradient(to bottom, #ffc124 5%, #ffec64 100%);
-	background-color:#ffc124;
-  color:#000000;
-}
-.selectButton:active {
-	position:relative;
-	top:1px;
-}
 
 </style>
 </style>
@@ -195,11 +171,9 @@
                     <label for="RSO_NAME">Select RSO</label>
                     <p><input id="RSO_NAME" name = "RSO_NAME" list="RSO" placeholder="Search">
                     <datalist id="RSO">
-                    </datalist>
-                    <a href="#" input type="select" class="selectButton">Select</a></p>
-
+                    </datalist></p>
                     <label for="rsoname">RSO Name</label>
-                    <input type="text" id="rsoname" name="rsoname" placeholder="..." value={RSO_NAME}>
+                    <input type="text" id="rsoname" name="rsoname" placeholder="...">
                     <label for="rsoadvis">RSO Advisor</label>
                     <input type="text" id="rsoadvis" name="rsoadvisor" placeholder="...">
                     <p><label for="advphnum">Advisor Phone Number</label>
@@ -276,34 +250,6 @@
         })
       })
 
-      updaterso.onselect = async(e) => {
-        e.preventDefault();
-
-        var formData = new FormData(updaterso)
-        fetch('https://secure-forest-78791.herokuapp.com/sga/updaterso.html', {
-            method: 'POST',
-            body: formData
-        }).then(response => response.json())
-          .then(data => {
-            console.log(data.body);
-            if (!(typeof data.body === "string" || data.body instanceof String) && data.body.length > 0){
-              updaterso.style.visibility = 'hidden';
-              returnTable.style.visibility = 'visible';
-              for (i in data.body){
-                var str = "<tr>\n"
-                for(s in data.body[i]){
-                  str += "<th> " + data.body[i][s] + " </th>\n"
-                }
-                str += "\n</tr>"
-                $("#returnTable tbody").append(str)
-              }
-            } else {
-              alert(data.body)
-            }
-          })
-      }
-
-/* Old Button Code (transfer same function to select RSO button)
       updaterso.onsubmit = async(e) => {
         e.preventDefault();
 
@@ -330,7 +276,6 @@
             }
           })
       }
-*/
     </script>
 
   <div class="footer">
