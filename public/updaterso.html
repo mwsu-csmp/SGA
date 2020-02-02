@@ -171,13 +171,13 @@
                     </datalist></p>
 
                     <label for="RSO_NAME">RSO Name</label>
-                    <p><input type="text" id="RSO_NAME" name = "RSO_NAME" list="RSO" placeholder="...">
-                    <datalist id="RSO">
+                    <p><input type="text" id="RSO_NAME" name = "RSO_NAME" list="RSOINFO" placeholder="...">
+                    <datalist id="RSOINFO">
                     </datalist></p>
 
                     <label for="RSO_ADVISOR">RSO Advisor</label>
-                    <p><input type="text" id="RSO_ADVISOR" name = "RSO_NAME" list="RSO" placeholder="...">
-                    <datalist id="RSO">
+                    <p><input type="text" id="RSO_ADVISOR" name = "RSO_ADVISOR" list="RSOINFO" placeholder="...">
+                    <datalist id="RSOINFO">
                     </datalist></p>
 
                     <label for="rsoname">RSO Name</label>
@@ -232,6 +232,23 @@
                for (key in data){
                   var text = data[key]
                   $('#RSO').append("<option>"+text+"</option>");
+               }
+            },
+            error: function(jqXHR, textStatus, errorThrown){
+               console.log(errorThrown);
+            }
+         })
+      })
+      $(document).ready(function(){
+         $.ajax({
+            url: 'https://secure-forest-78791.herokuapp.com/sga/rso_information',
+            method: 'GET',
+            dataType: 'json',
+            success: function(data){
+               //console.log(data);
+               for (key in data){
+                  var text = data[key]
+                  $('#RSOINFO').append("<option>"+text+"</option>");
                }
             },
             error: function(jqXHR, textStatus, errorThrown){
