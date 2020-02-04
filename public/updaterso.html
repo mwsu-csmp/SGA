@@ -10,7 +10,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="jquery-3.3.1.js"></script>
-<script src="js/additem.js"></script>
 <style type="text/css">
   html,
   body {
@@ -139,32 +138,6 @@
     padding: 20px;
 
   }
-  .selectButton {
-  box-shadow:inset 0px 0px 0px 0px #fff6af;
-	background:linear-gradient(to bottom, #ffec64 5%, #ffc124 100%);
-	background-color:#ffec64;
-	border:1px solid #ffc400;
-	display:inline-block;
-	cursor:pointer;
-	color:#000000;
-	font-family:Arial;
-	font-size:12px;
-	font-weight:bold;
-	padding:4px 8px;
-	text-decoration:none;
-	text-shadow:0px 1px 0px #ffee66;
-}
-.selectButton:hover {
-	background:linear-gradient(to bottom, #ffc124 5%, #ffec64 100%);
-	background-color:#ffc124;
-  color:#000000;
-}
-.selectButton:active {
-	position:relative;
-	top:1px;
-}
-
-</style>
 </style>
 <div class="main-container">
   <div class="header">
@@ -195,15 +168,25 @@
                     <label for="RSO_NAME">Select RSO</label>
                     <p><input id="RSO_NAME" name = "RSO_NAME" list="RSO" placeholder="Search">
                     <datalist id="RSO">
-                    </datalist>
-                    <a href="#" input type="select" class="selectButton">Select</a></p>
+                    </datalist></p>
 
-                    <label for="rsoname">RSO Name</label>
-                    <input type="text" id="rsoname" name="rsoname" placeholder="..." value={RSO_NAME}>
-                    <label for="rsoadvis">RSO Advisor</label>
-                    <input type="text" id="rsoadvis" name="rsoadvisor" placeholder="...">
-                    <p><label for="advphnum">Advisor Phone Number</label>
-                    <p><input type="tel" id="advphnum" name="advisorphonenum" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required></p></p>
+                    <label for="RSO_NAME">RSO Name</label>
+                    <p><input type="text" id="RSO_NAME" name = "RSO_NAME" list="RSOINFO" placeholder="...">
+                    <datalist id="RSOINFO">
+                    </datalist></p>
+
+                    <label for="RSO_ADVISOR">RSO Advisor</label>
+                    <p><input type="text" id="RSO_ADVISOR" name = "RSO_ADVISOR" list="RSOINFO" placeholder="...">
+                    <datalist id="RSOINFO">
+                    </datalist></p>
+
+                    <label for="ADVISOR_PHONE">Advisor Phone Number</label>
+                    <p><input type="text" id="ADVISOR_PHONE" name = "ADVISOR_PHONE" list="RSOINFO" placeholder="...">
+                    <datalist id="RSOINFO">
+                    </datalist></p>
+
+
+
                     <label for="advemailadd">Advisor Email Address</label>
                     <input type="text" id="advemailadd" name="advisoremailaddress" placeholder="...">
                     <label for="notes">Notes</label>
@@ -252,8 +235,25 @@
             }
          })
       })
+      $(document).ready(function(){
+         $.ajax({
+            url: 'https://secure-forest-78791.herokuapp.com/sga/rso_information',
+            method: 'GET',
+            dataType: 'json',
+            success: function(data){
+               //console.log(data);
+               for (key in data){
+                  var text = data[key]
+                  $('#RSOINFO').append("<option>"+text+"</option>");
+               }
+            },
+            error: function(jqXHR, textStatus, errorThrown){
+               console.log(errorThrown);
+            }
+         })
+      })
 
-      var updaterso = document.getElementById('updateforrso')
+      var updaterso = document.getElementById('updaterso')
       var returnTable = document.getElementById('returnTable')
 
       $(document).ready(function(){
@@ -276,34 +276,6 @@
         })
       })
 
-      updaterso.onselect = async(e) => {
-        e.preventDefault();
-
-        var formData = new FormData(updaterso)
-        fetch('https://secure-forest-78791.herokuapp.com/sga/updaterso.html', {
-            method: 'POST',
-            body: formData
-        }).then(response => response.json())
-          .then(data => {
-            console.log(data.body);
-            if (!(typeof data.body === "string" || data.body instanceof String) && data.body.length > 0){
-              updaterso.style.visibility = 'hidden';
-              returnTable.style.visibility = 'visible';
-              for (i in data.body){
-                var str = "<tr>\n"
-                for(s in data.body[i]){
-                  str += "<th> " + data.body[i][s] + " </th>\n"
-                }
-                str += "\n</tr>"
-                $("#returnTable tbody").append(str)
-              }
-            } else {
-              alert(data.body)
-            }
-          })
-      }
-
-/* Old Button Code (transfer same function to select RSO button)
       updaterso.onsubmit = async(e) => {
         e.preventDefault();
 
@@ -330,7 +302,6 @@
             }
           })
       }
-*/
     </script>
 
   <div class="footer">
