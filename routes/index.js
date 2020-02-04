@@ -78,7 +78,7 @@ router.get("/sga/rso_names", (req, res) => {
 //Fetch and render RSO Information for Update RSO So we can hopefully update maybe
 router.get("/sga/rso_information", (req, res) => {
 
-  connection.query("SELECT RSO_NAME, RSO_ADVISOR, ADVISOR_PHONE, ADVISOR_EMAIL, RSO_NOTES, ACTIVE FROM RSO",(err, results, fields) => {
+  connection.query("SELECT RSO_NAME, RSO_ADVISOR, ADVISOR_PHONE, ADVISOR_EMAIL, RSO_NOTES, ACTIVE FROM RSO WHERE",(err, results, fields) => {
     if (err) {
       console.log('error')
     } else {
