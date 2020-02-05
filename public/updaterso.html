@@ -188,13 +188,15 @@ top:1px;
     </div>
     <div class="container">
             <div class="row">
-                <form id = "updaterso">
+                <form id = "selectrso">
                     <label for="RSO_NAME">Select RSO</label>
                     <p><input id="RSO_NAME" name = "RSO_NAME" list="RSO" placeholder="Search">
                     <datalist id="RSO">
                     </datalist>
                     <a button type= "submit" name="submit" value="RSO_NAME" class="selectButton">Select</a></p>
+                </form>
 
+                <form id = "updaterso">
                     <label for="RSO_ADVISOR">RSO Advisor</label>
                     <p><input type="text" id="RSO_ADVISOR" name = "RSO_ADVISOR" list="RSOINFO" placeholder="...">
                     <datalist id="RSOINFO">
@@ -280,14 +282,14 @@ top:1px;
       })
 
       //lines 283-331 is what needs to be changed
-      var RSO_NAME = document.getElementById('RSO_NAME')
+      var selectrso = document.getElementById('selectrso')
       var returnTable = document.getElementById('returnTable')
       var RSO_ADVISOR = document.getElementById('RSO_ADVISOR')
 
       $(document).ready(function(){
         returnTable.style.visibility = 'hidden';
         RSO_ADVISOR.style.visibility = 'hidden';
-        RSO_NAME.style.visibility = 'visible';
+        selectrso.style.visibility = 'visible';
 
         $.ajax({
             url: 'https://secure-forest-78791.herokuapp.com/sga/rso_information',
@@ -305,7 +307,7 @@ top:1px;
         })
       })
 
-      RSO_NAME.onsubmit = async(e) => {
+      selectrso.onsubmit = async(e) => {
         e.preventDefault();
 
         var formData = new FormData(RSO_NAME)
@@ -316,7 +318,7 @@ top:1px;
           .then(data => {
             console.log(data.body);
             if (!(typeof data.body === "string" || data.body instanceof String) && data.body.length > 0){
-              RSO_NAME.style.visibility = 'hidden';
+              selectrso.style.visibility = 'hidden';
               returnTable.style.visibility = 'visible';
               RSO_ADVISOR.style.visibility = 'visible';
               for (i in data.body){
