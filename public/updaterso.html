@@ -193,7 +193,9 @@ top:1px;
                     <p><input id="RSO_NAME" name = "RSO_NAME" list="RSO" placeholder="Search">
                     <datalist id="RSO">
                     </datalist>
-                    <a href="#" class="selectButton" onclick="MyFunction();">Select</a></p>
+                    <p></p>
+                    <a href="#" class="selectButton" onclick="MyFunction();">Test 1</a></p>
+                    <a href="#" button type= "submit" name="submit" value="submit" class="selectButton" value="RSO_NAME">Test 2</a></p>
 
                     <label for="RSO_ADVISOR">RSO Advisor</label>
                     <p><input type="text" id="RSO_ADVISOR" name = "RSO_ADVISOR" list="RSOINFO" placeholder="...">
@@ -280,12 +282,12 @@ top:1px;
       })
 
       //lines 283-331 is what needs to be changed
-      var updaterso = document.getElementById('updaterso')
+      var RSO_NAME = document.getElementById('RSO_NAME')
       var returnTable = document.getElementById('returnTable')
 
       $(document).ready(function(){
         returnTable.style.visibility = 'hidden';
-        updaterso.style.visibility = 'visible';
+        RSO_NAME.style.visibility = 'visible';
 
         $.ajax({
             url: 'https://secure-forest-78791.herokuapp.com/sga/rso_information',
@@ -303,10 +305,10 @@ top:1px;
         })
       })
 
-      updaterso.onsubmit = async(e) => {
+      RSO_NAME.onsubmit = async(e) => {
         e.preventDefault();
 
-        var formData = new FormData(updaterso)
+        var formData = new FormData(RSO_NAME)
         fetch('https://secure-forest-78791.herokuapp.com/sga/updaterso.html', {
             method: 'POST',
             body: formData
@@ -314,7 +316,7 @@ top:1px;
           .then(data => {
             console.log(data.body);
             if (!(typeof data.body === "string" || data.body instanceof String) && data.body.length > 0){
-              updaterso.style.visibility = 'hidden';
+                RSO_NAME.style.visibility = 'hidden';
               returnTable.style.visibility = 'visible';
               for (i in data.body){
                 var str = "<tr>\n"
