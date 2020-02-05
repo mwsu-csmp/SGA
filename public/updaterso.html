@@ -192,12 +192,12 @@ top:1px;
                     <p><input id="RSO_NAME" name = "RSO_NAME" list="RSO" placeholder="Search">
                     <datalist id="RSO">
                     </datalist>
-                    <a button type= "submit" id="submit" name="submit" value="RSO_NAME" class="selectButton" onclick="dosomething(this)">Select</a></p>
+                    <a button type= "submit" id="submit" name="submit" value="RSO_NAME" class="selectButton">Select</a></p>
                 </form>
                 <script>
-                    function dosomething(element){
-                    alert("value is "+element.value);
-                    };
+                    function addition(){
+                    let submit = Submit(document.getElementById("submit").value);
+                    console.log("Submit is "+submit);
                 </script>
 
                 <form id = "updaterso">
