@@ -193,7 +193,7 @@ top:1px;
                     <p><input id="RSO_NAME" name = "RSO_NAME" list="RSO" placeholder="Search">
                     <datalist id="RSO">
                     </datalist>
-                    <a href="#" class="selectButton">Select</a></p>
+                    <a href="#" class="selectButton" onclick="MyFunction();">Select</a></p>
 
                     <label for="RSO_ADVISOR">RSO Advisor</label>
                     <p><input type="text" id="RSO_ADVISOR" name = "RSO_ADVISOR" list="RSOINFO" placeholder="...">
@@ -205,12 +205,16 @@ top:1px;
                     <datalist id="RSOINFO">
                     </datalist></p>
 
+                    <label for="ADVISOR_EMAIL">Advisor Email Address</label>
+                    <p><input type="text" id="ADVISOR_EMAIL" name = "ADVISOR_EMAIL" list="RSOINFO" placeholder="...">
+                    <datalist id="RSOINFO">
+                    </datalist></p>
 
+                    <label for="RSO_NOTES">Notes</label>
+                    <p><input type="text" id="RSO_NOTES" name = "RSO_NOTES" list="RSOINFO" placeholder="...">
+                    <datalist id="RSOINFO">
+                    </datalist></p>
 
-                    <label for="advemailadd">Advisor Email Address</label>
-                    <input type="text" id="advemailadd" name="advisoremailaddress" placeholder="...">
-                    <label for="notes">Notes</label>
-                    <p><input type="text" id="notes" name="notes" placeholder="..."></p>
                     <h4>Archive the RSO?</h4>
                     <form action="/action_page.php">
                       <input type="checkbox" name="option1" value="Yes">Yes<br>
@@ -221,7 +225,7 @@ top:1px;
                  </form>
              </div>
     </div>
-<!-- No longer using table
+<!-- Not using this table for now i think?
     <div class="container-fluid"></div>
         <div class= "scrolling-container">
             <table id = "returnTable">
@@ -238,6 +242,7 @@ top:1px;
     </div>
 -->
     <script>
+      // Pull RSO Names data and assign it to #RSO
       $(document).ready(function(){
          $.ajax({
             url: 'https://secure-forest-78791.herokuapp.com/sga/rso_names',
@@ -255,6 +260,7 @@ top:1px;
             }
          })
       })
+      // Pull all RSO data and assign it to #RSOINFO
       $(document).ready(function(){
          $.ajax({
             url: 'https://secure-forest-78791.herokuapp.com/sga/rso_information',
@@ -273,6 +279,7 @@ top:1px;
          })
       })
 
+      //lines 283-331 is what needs to be changed
       var updaterso = document.getElementById('updaterso')
       var returnTable = document.getElementById('returnTable')
 
