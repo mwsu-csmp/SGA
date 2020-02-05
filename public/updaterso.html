@@ -192,12 +192,12 @@ top:1px;
                     <p><input id="RSO_NAME" name = "RSO_NAME" list="RSO" placeholder="Search">
                     <datalist id="RSO">
                     </datalist>
-                    <a button type= "submit" id="submit" name="submit" value="RSO_NAME" class="selectButton" #ref (click)="addDetails($event)">Select</a></p>
+                    <a button type= "submit" id="submit" name="submit" value="RSO_NAME" class="selectButton" onclick="dosomething(this)">Select</a></p>
                 </form>
                 <script>
-                    addDetails(value) {
-                    console.log("value:",value.currentTarget.name);
-                    }
+                    function dosomething(element){
+                    alert("value is "+element.value);
+                    };
                 </script>
 
                 <form id = "updaterso">
