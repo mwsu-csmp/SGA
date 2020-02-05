@@ -195,7 +195,7 @@ top:1px;
                     </datalist>
                     <a button type= "submit" name="submit" value="RSO_NAME" class="selectButton">Select</a></p>
                 </form>
-
+                    
                 <form id = "updaterso">
                     <label for="RSO_ADVISOR">RSO Advisor</label>
                     <p><input type="text" id="RSO_ADVISOR" name = "RSO_ADVISOR" list="RSOINFO" placeholder="...">
@@ -310,7 +310,7 @@ top:1px;
       selectrso.onsubmit = async(e) => {
         e.preventDefault();
 
-        var formData = new FormData(RSO_NAME)
+        var formData = new FormData(selectrso)
         fetch('https://secure-forest-78791.herokuapp.com/sga/updaterso.html', {
             method: 'POST',
             body: formData
