@@ -88,6 +88,7 @@ router.get("/sga/rso_information", (req, res) => {
         tbl[i] = [results[i].RSO_ADVISOR, results[i].ADVISOR_PHONE, results[i].ADVISOR_EMAIL, results[i].RSO_NOTES]
       }
       res.send(JSON.stringify(tbl))
+      console.log(tbl);
     }
   })
 });
