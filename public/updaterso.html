@@ -289,7 +289,6 @@ top:1px;
 
       $(document).ready(function(){
         //returnTable.style.visibility = 'hidden';
-        RSO_ADVISOR.style.visibility = 'hidden';
         selectrso.style.visibility = 'visible';
 
         $.ajax({
@@ -321,7 +320,6 @@ top:1px;
             if (!(typeof data.body === "string" || data.body instanceof String) && data.body.length > 0){
               selectrso.style.visibility = 'hidden';
               //returnTable.style.visibility = 'visible';
-              RSO_ADVISOR.style.visibility = 'visible';
               for (i in data.body){
                 var str = "<tr>\n"
                 for(s in data.body[i]){
