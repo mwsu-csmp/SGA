@@ -283,11 +283,11 @@ top:1px;
 
       //lines 283-331 is what needs to be changed
       var selectrso = document.getElementById('selectrso')
-      var returnTable = document.getElementById('returnTable')
+      //var returnTable = document.getElementById('returnTable')
       var RSO_ADVISOR = document.getElementById('RSO_ADVISOR')
 
       $(document).ready(function(){
-        returnTable.style.visibility = 'hidden';
+        //returnTable.style.visibility = 'hidden';
         RSO_ADVISOR.style.visibility = 'hidden';
         selectrso.style.visibility = 'visible';
 
@@ -319,7 +319,7 @@ top:1px;
             console.log(data.body);
             if (!(typeof data.body === "string" || data.body instanceof String) && data.body.length > 0){
               selectrso.style.visibility = 'hidden';
-              returnTable.style.visibility = 'visible';
+              //returnTable.style.visibility = 'visible';
               RSO_ADVISOR.style.visibility = 'visible';
               for (i in data.body){
                 var str = "<tr>\n"
@@ -327,7 +327,7 @@ top:1px;
                   str += "<th> " + data.body[i][s] + " </th>\n"
                 }
                 str += "\n</tr>"
-                $("#returnTable tbody").append(str)
+                //$("#returnTable tbody").append(str)
                 $("#RSO_ADVISOR tbody").append(str)
               }
             } else {
