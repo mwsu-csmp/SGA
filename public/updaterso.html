@@ -192,12 +192,16 @@ top:1px;
                     <p><input id="RSO_NAME" name = "RSO_NAME" list="RSO" placeholder="Search">
                     <datalist id="RSO">
                     </datalist>
-                    <a button type= "submit" id="submit" name="submit" value="RSO_NAME" class="selectButton" onclick="dosomething(this)">Select</a></p>
+                    <a button type= "submit" id="submit" name="submit" value="RSO_NAME" class="selectButton">Select</a></p>
                 </form>
                 <script>
-                    function dosomething(element){
-                    console.log("value is "+element.value);
-                    };
+                    var submitButton = document.getElementById('submit')
+                    var RSO_NAME = document.getElementById('RSO_NAME')
+
+                    submitButton.onclick = async(e) => {
+                    e.preventDefault();
+                    console.log(RSO_NAME.value)
+                    }
                 </script>
 
                 <form id = "updaterso">
