@@ -257,7 +257,7 @@ top:1px;
       // Pull RSO Names data and assign it to #RSO
       $(document).ready(function(){
          $.ajax({
-            url: 'https://secure-forest-78791.herokuapp.com/sga/rso_names',
+            url: '/sga/rso_names',
             method: 'GET',
             dataType: 'json',
             success: function(data){
@@ -275,7 +275,7 @@ top:1px;
       // Pull all RSO data and assign it to #RSOINFO
       $(document).ready(function(){
          $.ajax({
-            url: 'https://secure-forest-78791.herokuapp.com/sga/rso_information',
+            url: '/sga/rso_information',
             method: 'GET',
             dataType: 'json',
             success: function(data){
@@ -301,7 +301,7 @@ top:1px;
         selectrso.style.visibility = 'visible';
 
         $.ajax({
-            url: 'https://secure-forest-78791.herokuapp.com/sga/rso_information',
+            url: '/sga/rso_information',
             method: 'GET',
             dataType: 'json',
             success: function(data){
@@ -320,7 +320,7 @@ top:1px;
         e.preventDefault();
 
         var formData = new FormData(selectrso)
-        fetch('https://secure-forest-78791.herokuapp.com/sga/updaterso.html', {
+        fetch('/sga/updaterso.html', {
             method: 'POST',
             body: formData
         }).then(response => response.json())
