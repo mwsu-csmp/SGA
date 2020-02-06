@@ -195,9 +195,8 @@ top:1px;
 
                 <form id = "updaterso">
                     <label for="RSO_ADVISOR">RSO Advisor</label>
-                    <p><input type="text" id="RSO_ADVISOR" name = "RSO_ADVISOR" list="RSOINFO" placeholder="...">
-                    <datalist id="RSOINFO">
-                    </datalist></p>
+                    <p><input type="text" id="RSO_ADVISOR" name = "RSO_ADVISOR" placeholder="...">
+                    </p>
 
                     <label for="ADVISOR_PHONE">Advisor Phone Number</label>
                     <p><input type="text" id="ADVISOR_PHONE" name = "ADVISOR_PHONE" list="RSOINFO" placeholder="...">
@@ -257,6 +256,7 @@ top:1px;
               },
               success: function(data){
                 console.log(data);
+                $('#RSO_ADVISOR').val(data[0])
               },
               error: function(jqXHR, textStatus, errorThrown){
                 console.log(errorThrown);
