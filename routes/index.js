@@ -77,22 +77,23 @@ router.get("/sga/rso_names", (req, res) => {
 
 //Fetch and render RSO Information for Update RSO So we can hopefully update maybe
 router.get("/sga/rso_information", (req, res) => {
+  console.log(req.query['RSO_NAME'])
 
-  connection.query("SELECT RSO_ADVISOR, ADVISOR_PHONE, ADVISOR_EMAIL, RSO_NOTES FROM RSO WHERE",(err, results, fields) => {
+  var sql = "SELECT RSO_ADVISOR, ADVISOR_PHONE, ADVISOR_EMAIL, RSO_NOTES FROM RSO WHERE RSO_NAME = " + mysql.escape(req.query['RSO_NAME']);
+  connection.query(sql,(err, results, fields) => {
     if (err) {
       console.log('error')
     } else {
       var tbl = [];
 
       for (i in results) {
-        tbl[i] = [results[i].RSO_ADVISOR, results[i].ADVISOR_PHONE, results[i].ADVISOR_EMAIL, results[i].RSO_NOTES]
+        tbl = [results[i].RSO_ADVISOR, results[i].ADVISOR_PHONE, results[i].ADVISOR_EMAIL, results[i].RSO_NOTES]
       }
       res.send(JSON.stringify(tbl))
       console.log(tbl);
     }
   })
 });
-
 router.post("/login", (req, res) => {
   res.render('admindashboard.html')
 });
