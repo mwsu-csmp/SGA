@@ -189,7 +189,7 @@ top:1px;
             <div class="row">
                 <form id = "selectrso">
                     <label for="RSO_NAME">Select RSO</label>
-                    <p><input id="RSO_NAME" name = "RSO_NAME" list="RSO" placeholder="Search">
+                    <p><select id="RSO_NAME" name = "RSO_NAME" list="RSO" placeholder="Search"></select>
                     <datalist id="RSO">
                     </datalist>
                     <a button type= "submit" id="submit" name="submit" value="RSO_NAME" class="selectButton">Select</a></p>
@@ -264,7 +264,7 @@ top:1px;
                //console.log(data);
                for (key in data){
                   var text = data[key]
-                  $('#RSO').append("<option>"+text+"</option>");
+                  $('#RSO_NAME').append("<option value='"+key+"'>"+text+"</option>");
                }
             },
             error: function(jqXHR, textStatus, errorThrown){
