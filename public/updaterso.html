@@ -189,20 +189,9 @@ top:1px;
             <div class="row">
                 <form id = "selectrso">
                     <label for="RSO_NAME">Select RSO</label>
-                    <p><select id="RSO_NAME" name = "RSO_NAME" list="RSO" placeholder="Search"></select>
-                    <datalist id="RSO">
-                    </datalist>
+                    <p><select id="RSO_NAME" name = "RSO_NAME" placeholder="Search"></select>
                     <a button type= "submit" id="submit" name="submit" value="RSO_NAME" class="selectButton">Select</a></p>
                 </form>
-                <script>
-                    var submitButton = document.getElementById('submit')
-                    var RSO_NAME = document.getElementById('RSO_NAME')
-
-                    submitButton.onclick = async(e) => {
-                    e.preventDefault();
-                    console.log(RSO_NAME.value)
-                    }
-                </script>
 
                 <form id = "updaterso">
                     <label for="RSO_ADVISOR">RSO Advisor</label>
@@ -254,7 +243,7 @@ top:1px;
 -->
 
     <script> //(commented out every returnTable and trying form fields as replacement)
-      // Pull RSO Names data and assign it to #RSO
+      // Pull RSO Names data and assign it to #RSO_NAME
       $(document).ready(function(){
          $.ajax({
             url: '/sga/rso_names',
@@ -264,25 +253,7 @@ top:1px;
                //console.log(data);
                for (key in data){
                   var text = data[key]
-                  $('#RSO_NAME').append("<option value='"+key+"'>"+text+"</option>");
-               }
-            },
-            error: function(jqXHR, textStatus, errorThrown){
-               console.log(errorThrown);
-            }
-         })
-      })
-      // Pull all RSO data and assign it to #RSOINFO
-      $(document).ready(function(){
-         $.ajax({
-            url: '/sga/rso_information',
-            method: 'GET',
-            dataType: 'json',
-            success: function(data){
-               //console.log(data);
-               for (key in data){
-                  var text = data[key]
-                  $('#RSOINFO').append("<option>"+text+"</option>");
+                  $('#RSO_NAME').append("<option>"+text+"</option>");
                }
             },
             error: function(jqXHR, textStatus, errorThrown){
@@ -296,25 +267,6 @@ top:1px;
       //var returnTable = document.getElementById('returnTable')
       var RSO_ADVISOR = document.getElementById('RSO_ADVISOR')
 
-      $(document).ready(function(){
-        //returnTable.style.visibility = 'hidden';
-        selectrso.style.visibility = 'visible';
-
-        $.ajax({
-            url: '/sga/rso_information',
-            method: 'GET',
-            dataType: 'json',
-            success: function(data){
-              //console.log(data);
-              for (key in data){
-                  var text = data[key]
-              }
-            },
-            error: function(jqXHR, textStatus, errorThrown){
-              console.log(errorThrown);
-            }
-        })
-      })
 
       selectrso.onsubmit = async(e) => {
         e.preventDefault();
@@ -342,6 +294,14 @@ top:1px;
               alert(data.body)
             }
           })
+      }
+
+      var submitButton = document.getElementById('submit')
+      var RSO_NAME = document.getElementById('RSO_NAME')
+
+      submitButton.onclick = async(e) => {
+      e.preventDefault();
+      console.log(RSO_NAME.value)
       }
     </script>
 
