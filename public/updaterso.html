@@ -225,24 +225,8 @@ top:1px;
              </div>
     </div>
 
-<!-- Not using this table for now i think?
-    <div class="container-fluid"></div>
-        <div class= "scrolling-container">
-            <table id = "returnTable">
-                <tr>
-                    <th>RSO Name</th>
-                    <th>RSO Advisor</th>
-                    <th>Advisor Phone Number</th>
-                    <th>Advisor Email Address</th>
-                    <th>Notes</th>
-                    <th>Archived</th>
-                </tr>
-            </table>
-        </div>
-    </div>
--->
 
-    <script> //(commented out every returnTable and trying form fields as replacement)
+    <script>
       // Pull RSO Names data and assign it to #RSO_NAME
       $(document).ready(function(){
          $.ajax({
@@ -262,37 +246,21 @@ top:1px;
          })
       })
 
-      //lines 283-331 is what needs to be changed
-      var selectrso = document.getElementById('selectrso')
-      //var returnTable = document.getElementById('returnTable')
-      var RSO_ADVISOR = document.getElementById('RSO_ADVISOR')
-
-
-      selectrso.onsubmit = async(e) => {
+      submitButton.onclick = async(e) => {
         e.preventDefault();
-
-        var formData = new FormData(selectrso)
-        fetch('/sga/updaterso.html', {
-            method: 'POST',
-            body: formData
-        }).then(response => response.json())
-          .then(data => {
-            console.log(data.body);
-            if (!(typeof data.body === "string" || data.body instanceof String) && data.body.length > 0){
-              selectrso.style.visibility = 'hidden';
-              //returnTable.style.visibility = 'visible';
-              for (i in data.body){
-                var str = "<tr>\n"
-                for(s in data.body[i]){
-                  str += "<th> " + data.body[i][s] + " </th>\n"
-                }
-                str += "\n</tr>"
-                //$("#returnTable tbody").append(str)
-                $("#RSO_ADVISOR tbody").append(str)
+        $.ajax({
+              url: '/sga/rso_information',
+              method: 'GET',
+              dataType: 'json',
+              data: {
+                'RSO_NAME': RSO_NAME.value
+              },
+              success: function(data){
+                console.log(data);
+              },
+              error: function(jqXHR, textStatus, errorThrown){
+                console.log(errorThrown);
               }
-            } else {
-              alert(data.body)
-            }
           })
       }
 
@@ -304,6 +272,7 @@ top:1px;
       console.log(RSO_NAME.value)
       }
     </script>
+
 
   <div class="footer">
     <hr width="80%">
