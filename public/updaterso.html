@@ -245,6 +245,9 @@ top:1px;
          })
       })
 
+      var submitButton = document.getElementById('submit')
+      var RSO_NAME = document.getElementById('RSO_NAME')
+
       submitButton.onclick = async(e) => {
         e.preventDefault();
         $.ajax({
@@ -263,9 +266,6 @@ top:1px;
               }
           })
       }
-
-      var submitButton = document.getElementById('submit')
-      var RSO_NAME = document.getElementById('RSO_NAME')
     </script>
 
 
