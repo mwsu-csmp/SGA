@@ -119,8 +119,6 @@ router.post("/sga/updaterso.html", (req, res) => {
 
   sql = mysql.format(sql, insertAdvisor, insertPhone, insertEmail, insertNote, insertActive, insertName);
 
-  //Log to debug
-  console.log(sql);
   connection.query(sql, [tbl], (err) => {
     if (err) {
       res.send(JSON.stringify({body: 'Error: ' + err.stack}));
