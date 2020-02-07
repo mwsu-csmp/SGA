@@ -117,7 +117,9 @@ router.post("/sga/updaterso.html", (req, res) => {
   var insertNote = [req.query['RSO_NOTE']];
   var insertActive = [req.query['ACTIVE']];
 
-  sql = mysql.format(sql, insertAdvisor, insertPhone, insertEmail, insertNote, insertActive, insertName);
+  var insert =[insertAdvisor, insertPhone, insertEmail, insertNote, insertActive, insertName];
+
+  sql = mysql.format(sql, insert);
 
   connection.query(sql, [tbl], (err) => {
     if (err) {
