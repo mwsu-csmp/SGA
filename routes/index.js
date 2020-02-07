@@ -121,9 +121,9 @@ router.post("/sga/updaterso.html", (req, res) => {
 
   connection.query(sql, [tbl], (err) => {
     if (err) {
-      res.send(JSON.stringify({body: 'Error: ' + err.stack}))
+      res.send(JSON.stringify({body: 'Error: ' + err.stack}));
     } else {
-      res.send(JSON.stringify({body: 'Inserted item into item table'}))
+      res.send(JSON.stringify({body: 'The RSO has been updated.'}));
     }
   });
 });
