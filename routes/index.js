@@ -57,7 +57,7 @@ router.get('/sga/searchrso.html', (req, res) => {
   res.render('searchrso.html')
 });
 
-//Fetch and render the name of RSO's so they can be searched from in add item
+//Fetch and render the name of RSO's so they can be searched by name
 router.get("/sga/rso_names", (req, res) => {
   
   connection.query("SELECT RSO_NAME FROM RSO", (err, results, fields) => {
@@ -75,20 +75,19 @@ router.get("/sga/rso_names", (req, res) => {
   })
 });
 
-//Fetch and render RSO Information for Update RSO So we can hopefully update maybe
+//Fetch and render RSO Information for Update RSO So it pulls the other RSO fields
 router.get("/sga/rso_information", (req, res) => {
   console.log(req.query['RSO_NAME'])
 
-  var sql = "SELECT RSO_ADVISOR, ADVISOR_PHONE, ADVISOR_EMAIL, RSO_NOTES FROM RSO WHERE RSO_NAME = " + mysql.escape(req.query['RSO_NAME']);
+  var sql = "SELECT RSO_ADVISOR, ADVISOR_PHONE, ADVISOR_EMAIL, RSO_NOTES, ACTIVE FROM RSO WHERE RSO_NAME = ?"
+  var inserts = [req.query['RSO_NAME']]
+  sql = mysql.format(sql, inserts)
   connection.query(sql,(err, results, fields) => {
     if (err) {
       console.log('error')
     } else {
-      var tbl = [];
-
-      for (i in results) {
-        tbl = [results[i].RSO_ADVISOR, results[i].ADVISOR_PHONE, results[i].ADVISOR_EMAIL, results[i].RSO_NOTES]
-      }
+      console.log(results)
+      var tbl = [results[0].RSO_ADVISOR, results[0].ADVISOR_PHONE, results[0].ADVISOR_EMAIL, results[0].RSO_NOTES, results[0].ACTIVE]
       res.send(JSON.stringify(tbl))
       console.log(tbl);
     }
