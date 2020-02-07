@@ -96,7 +96,7 @@ router.get("/sga/rso_information", (req, res) => {
 
 //Function to Update an RSO
 router.post("/sga/updaterso.html", (req, res) => {
-
+/*
   //Variables for all the fields
   var name = req.files['RSO_NAME'];
   var advisorname = req.files['RSO_ADVISOR'];
@@ -107,6 +107,8 @@ router.post("/sga/updaterso.html", (req, res) => {
 
   //Table to hold all the information provided
   var tbl = [name, advisorname, phone, email, note, active];
+
+ */
 
   //SQL Statment to update all fields
   var sql = "UPDATE RSO SET RSO_ADVISOR = ?, ADVIOSOR_PHONE, ADVISOR_EMAIL = ?, RSO_NOTES =?, ACTIVE = ? WHERE RSO_NAME = ? ";
@@ -121,7 +123,7 @@ router.post("/sga/updaterso.html", (req, res) => {
 
   sql = mysql.format(sql, insert);
 
-  connection.query(sql, [tbl], (err) => {
+  connection.query(sql, insert, (err) => {
     if (err) {
       res.send(JSON.stringify({body: 'Error: ' + err.stack}));
     } else {
