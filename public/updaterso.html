@@ -199,25 +199,20 @@ top:1px;
                     </p>
 
                     <label for="ADVISOR_PHONE">Advisor Phone Number</label>
-                    <p><input type="text" id="ADVISOR_PHONE" name = "ADVISOR_PHONE" list="RSOINFO" placeholder="...">
-                    <datalist id="RSOINFO">
-                    </datalist></p>
+                    <p><input type="text"ARCHIVE_YES name = "ADVISOR_PHONE" placeholder="...">
+                    </p>
 
                     <label for="ADVISOR_EMAIL">Advisor Email Address</label>
-                    <p><input type="text" id="ADVISOR_EMAIL" name = "ADVISOR_EMAIL" list="RSOINFO" placeholder="...">
-                    <datalist id="RSOINFO">
-                    </datalist></p>
+                    <p><input type="text" id="ADVISOR_EMAIL" name = "ADVISOR_EMAIL" placeholder="...">
+                    </p>
 
                     <label for="RSO_NOTES">Notes</label>
-                    <p><input type="text" id="RSO_NOTES" name = "RSO_NOTES" list="RSOINFO" placeholder="...">
-                    <datalist id="RSOINFO">
-                    </datalist></p>
+                    <p><textarea id="RSO_NOTES" name = "RSO_NOTES" placeholder="  ..." cols="120" rows="10"></textarea>
+                    </p>
 
                     <h4>Archive the RSO?</h4>
-                    <form action="/action_page.php">
-                      <input type="checkbox" name="option1" value="Yes">Yes<br>
-                      <input type="checkbox" name="option2" value="No" checked>No<br><br>
-                    </form>
+                    <input type="checkbox" id="ARCHIVE_YES" name="ARCHIVE_YES" value="Y"> Yes
+                    </p>
 
                     <input type="submit"  class="dropbtn btn btn-default" value="Update RSO">
                  </form>
@@ -247,6 +242,7 @@ top:1px;
 
       var submitButton = document.getElementById('submit')
       var RSO_NAME = document.getElementById('RSO_NAME')
+      var ARCHIVE_YES = document.getElementById('ARCHIVE_YES')
 
       submitButton.onclick = async(e) => {
         e.preventDefault();
@@ -260,6 +256,14 @@ top:1px;
               success: function(data){
                 console.log(data);
                 $('#RSO_ADVISOR').val(data[0])
+                $('#ADVISOR_PHONE').val(data[1])
+                $('#ADVISOR_EMAIL').val(data[2])
+                $('#RSO_NOTES').val(data[3])
+                if (data[4] === 'Y') {
+                  ARCHIVE_YES.checked = false;
+                } else {
+                  ARCHIVE_YES.checked = true;
+                }
               },
               error: function(jqXHR, textStatus, errorThrown){
                 console.log(errorThrown);
