@@ -284,7 +284,7 @@ top:1px;
         formData.append("ADVISOR_PHONE", $('#ADVISOR_PHONE').val())
         formData.append("ADVISOR_EMAIL", $('#ADVISOR_EMAIL').val())
         formData.append("RSO_NOTES", $('#RSO_NOTES').val())
-        formData.append("ARCHIVE_YES", $('#ARCHIVE_YES').val())
+        formData.append("ARCHIVE_YES", ARCHIVE_YES.checked ? 'N' : 'Y')
 
         let response = await fetch('/sga/updaterso.html', {
           method: 'POST',
