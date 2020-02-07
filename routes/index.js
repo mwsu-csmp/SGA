@@ -109,7 +109,7 @@ router.post("/sga/updaterso.html", (req, res) => {
   var tbl = [name, advisorname, phone, email, note, active];
 
   //SQL Statment to update all fields
-  var sql = "UPDATE RSO SET RSO_ADVISOR = ?, ADVISOR_EMAIL = ?, RSO_NOTES =?, ACTIVE = ? WHERE RSO_NAME = ? ";
+  var sql = "UPDATE RSO SET RSO_ADVISOR = ?, ADVIOSOR_PHONE, ADVISOR_EMAIL = ?, RSO_NOTES =?, ACTIVE = ? WHERE RSO_NAME = ? ";
   var insertName = req.query['RSO_NAME'];
   var insertAdvisor = req.query['RSO_ADVISOR'];
   var insertPhone = req.query['ADVISOR_PHONE'];
