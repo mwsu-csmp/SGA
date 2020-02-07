@@ -80,18 +80,52 @@ router.get("/sga/rso_information", (req, res) => {
   console.log(req.query['RSO_NAME'])
 
   var sql = "SELECT RSO_ADVISOR, ADVISOR_PHONE, ADVISOR_EMAIL, RSO_NOTES, ACTIVE FROM RSO WHERE RSO_NAME = ?"
-  var inserts = [req.query['RSO_NAME']]
-  sql = mysql.format(sql, inserts)
+  var inserts = [req.query['RSO_NAME']];
+  sql = mysql.format(sql, inserts);
   connection.query(sql,(err, results, fields) => {
     if (err) {
-      console.log('error')
+      console.log('error');
     } else {
-      console.log(results)
-      var tbl = [results[0].RSO_ADVISOR, results[0].ADVISOR_PHONE, results[0].ADVISOR_EMAIL, results[0].RSO_NOTES, results[0].ACTIVE]
-      res.send(JSON.stringify(tbl))
+      console.log(results);
+      var tbl = [results[0].RSO_ADVISOR, results[0].ADVISOR_PHONE, results[0].ADVISOR_EMAIL, results[0].RSO_NOTES, results[0].ACTIVE];
+      res.send(JSON.stringify(tbl));
       console.log(tbl);
     }
   })
+});
+
+//Function to Update an RSO
+router.post("/sga/updaterso.html", (req, res) => {
+
+  //Variables for all the fields
+  var name = req.files['RSO_NAME'];
+  var advisorname = req.files['RSO_ADVISOR'];
+  var phone = req.files['ADVISOR_PHONE'];
+  var email = req.files['ADVISOR_EMAIL'];
+  var note = req.files['RSO_NOTE'];
+  var active = req.files['ACTIVE'];
+
+  //Table to hold all the information provided
+  var tbl = [name, advisorname, phone, email, note, active];
+
+  //SQL Statment to update all fields
+  var sql = "UPDATE RSO SET RSO_ADVISOR = ?, ADVISOR_EMAIL = ?, RSO_NOTES =?, ACTIVE = ? WHERE RSO_NAME = ? ";
+  var insertName = [req.query['RSO_NAME']];
+  var insertAdvisor = [req.query['RSO_ADVISOR']];
+  var insertPhone = [req.query['ADVISOR_PHONE']];
+  var insertEmail = [req.query['ADVISOR_EMAIL']];
+  var insertNote = [req.query['RSO_NOTE']];
+  var insertActive = [req.query['ACTIVE']];
+
+  sql = mysql.format(sql, insertAdvisor, insertPhone, insertEmail, insertNote, insertActive, insertName);
+
+  connection.query(sql, [tbl], (err) => {
+    if (err) {
+      res.send(JSON.stringify({body: 'Error: ' + err.stack}))
+    } else {
+      res.send(JSON.stringify({body: 'Inserted item into item table'}))
+    }
+  });
 });
 router.post("/login", (req, res) => {
   res.render('admindashboard.html')
@@ -133,6 +167,8 @@ router.post("/sga/searchrso.html", (req, res) => {
     }
   })
 });
+
+
 
 //Function to search for items
 router.post("/sga/itemsearch.html", (req, res) => {
