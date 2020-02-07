@@ -194,6 +194,8 @@ top:1px;
                 </form>
 
                 <form id = "updaterso">
+                    <input type = "hidden" id = "RSO_NAME_HIDDEN" name = "RSO_NAME_HIDDEN">
+
                     <label for="RSO_ADVISOR">RSO Advisor</label>
                     <p><input type="text" id="RSO_ADVISOR" name = "RSO_ADVISOR" placeholder="...">
                     </p>
@@ -255,6 +257,7 @@ top:1px;
               },
               success: function(data){
                 console.log(data);
+                $('#RSO_NAME_HIDDEN').val(RSO_NAME.value)
                 $('#RSO_ADVISOR').val(data[0])
                 $('#ADVISOR_PHONE').val(data[1])
                 $('#ADVISOR_EMAIL').val(data[2])
@@ -271,7 +274,29 @@ top:1px;
           })
       }
 
-      // Keep checkbox unchecked by default
+      updaterso.onsubmit = async(e) => {
+        e.preventDefault();
+
+        var formData = new FormData(updaterso)
+
+        formData.append("RSO_NAME_HIDDEN", $('#RSO_NAME_HIDDEN').val())
+        formData.append("RSO_ADVISOR", $('#RSO_ADVISOR').val())
+        formData.append("ADVISOR_PHONE", $('#ADVISOR_PHONE').val())
+        formData.append("ADVISOR_EMAIL", $('#ADVISOR_EMAIL').val())
+        formData.append("RSO_NOTES", $('#RSO_NOTES').val())
+        formData.append("ARCHIVE_YES", $('#ARCHIVE_YES').val())
+
+        let response = await fetch('/sga/updaterso.html', {
+          method: 'POST',
+          body: formData
+        })
+
+        let result = await response.json()
+
+        alert(result.body, null)
+      }
+
+      // Keep checkboxes unchecked by default
       var checkboxes = document.getElementsByTagName('input');
 
       for (var i=0; i<checkboxes.length; i++)  {
