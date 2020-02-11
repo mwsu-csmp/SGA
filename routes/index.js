@@ -57,6 +57,11 @@ router.get('/sga/searchrso.html', (req, res) => {
   res.render('searchrso.html')
 });
 
+//Fetch and Render the Inventory check page.
+router.get('/sga/inventorycheck.html', (req, res) => {
+  res.render('inventorycheck.html')
+});
+
 //Fetch and render the name of RSO's so they can be searched by name
 router.get("/sga/rso_names", (req, res) => {
   
