@@ -187,16 +187,15 @@ router.post("/sga/additem.html", (req, res) => {
   var warr = req.fields["warranty"];
   var warrenddate = req.fields["warrantyenddate"];
   var storloc = req.fields["storageloaction"];
-  var condition = req.fields["condition"];
   var foccategory = req.fields["foccategory"];
   var rso = req.fields["RSO"];
 
   //A variable to hold all the information gathered from the method above
   var tbl = [
-    [picture,number,noanum,name,desc,manuname,modnum,sernum,condition,sellname,purdate,purprice,warr,warrenddate,foccategory,storloc,rso]
+    [picture,number,noanum,name,desc,manuname,modnum,sernum,sellname,purdate,purprice,warr,warrenddate,foccategory,storloc,rso]
   ];
     //Variable to hold the SQL statement necessary to insert an item into the Database
-  var sql = "INSERT INTO INVENTORY(ITEM_PIC, TAG_NUM, NOA_NUM, ITEM_NAME, ITEM_DESC, MANUFACT_NAME, MODEL_NUM, SERIAL_NUM, ITEM_COND, SELLER_NAME, PUR_DATE, PUR_PRICE, WARRANTY, WAR_END_DATE, FOC_CAT, STORE_LOCAL, RSO_NAME) VALUES ?";
+  var sql = "INSERT INTO INVENTORY(ITEM_PIC, TAG_NUM, NOA_NUM, ITEM_NAME, ITEM_DESC, MANUFACT_NAME, MODEL_NUM, SERIAL_NUM, SELLER_NAME, PUR_DATE, PUR_PRICE, WARRANTY, WAR_END_DATE, FOC_CAT, STORE_LOCAL, RSO_NAME) VALUES ?";
 
   //Inserting the value into the table.
   connection.query(sql, [tbl], (err) => {
