@@ -104,7 +104,7 @@ router.post("/sga/updaterso.html", (req, res) => {
   var insertPhone = req.fields['ADVISOR_PHONE'];
   var insertEmail = req.fields['ADVISOR_EMAIL'];
   var insertNote = req.fields['RSO_NOTES'];
-  var insertActive = req.fields['ACTIVE'];
+  var insertActive = req.fields['ARCHIVE_YES'];
 
   var insert =[insertAdvisor, insertPhone, insertEmail, insertNote, insertActive, insertName];
 
