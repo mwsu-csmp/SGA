@@ -186,16 +186,100 @@ top:1px;
         </div>
     </div>
     <div class="container">
-            <div class="row">
+        <div class="row">
+            <form id = "searchforrso">
+                <label for="RSO_NAME">Search RSO</label>
+                <p><input id="RSO_NAME" name = "RSO_NAME" list="RSO" placeholder="Search">
+                <datalist id="RSO">
+                </datalist></p>
+            </form>
+        </div>
+    </div>
 
 
-
-             </div>
+    <div class="container-fluid">
+        <div class= "scrolling-container">
+            <table id = "returnTable">
+                <tr>
+                    <th>RSO Name</th>
+                    <th>RSO Advisor</th>
+                    <th>Item Name</th>
+                    <th>Tag Number</th>
+                </tr>
+            </table>
+        </div>
     </div>
 
 
     <script>
+      // Pull RSO Names data and assign it to #RSO_NAME
+      $(document).ready(function(){
+         $.ajax({
+            url: '/sga/rso_names',
+            method: 'GET',
+            dataType: 'json',
+            success: function(data){
+               //console.log(data);
+               for (key in data){
+                  var text = data[key]
+                  $('#RSO').append("<option>"+text+"</option>");
+               }
+            },
+            error: function(jqXHR, textStatus, errorThrown){
+               console.log(errorThrown);
+            }
+         })
+      })
 
+      var searchforrso = document.getElementById('searchforrso')
+      var returnTable = document.getElementById('returnTable')
+
+      $(document).ready(function(){
+          returnTable.style.visibility = 'hidden';
+          searchforrso.style.visibility = 'visible';
+
+          $.ajax({
+              url: 'https://secure-forest-78791.herokuapp.com/sga/rso_names',
+              method: 'GET',
+              dataType: 'json',
+              success: function(data){
+                //console.log(data);
+                for (key in data){
+                    var text = data[key]
+                }
+              },
+              error: function(jqXHR, textStatus, errorThrown){
+                console.log(errorThrown);
+              }
+          })
+        })
+
+        searchforrso.onsubmit = async(e) => {
+          e.preventDefault();
+
+          var formData = new FormData(searchforrso)
+          fetch('https://secure-forest-78791.herokuapp.com/sga/searchrso.html', {
+              method: 'POST',
+              body: formData
+          }).then(response => response.json())
+            .then(data => {
+              console.log(data.body);
+              if (!(typeof data.body === "string" || data.body instanceof String) && data.body.length > 0){
+                searchforrso.style.visibility = 'hidden';
+                returnTable.style.visibility = 'visible';
+                for (i in data.body){
+                  var str = "<tr>\n"
+                  for(s in data.body[i]){
+                    str += "<th> " + data.body[i][s] + " </th>\n"
+                  }
+                  str += "\n</tr>"
+                  $("#returnTable tbody").append(str)
+                }
+              } else {
+                alert(data.body)
+              }
+            })
+        }
     </script>
 
 
