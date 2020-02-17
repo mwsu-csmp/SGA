@@ -196,7 +196,6 @@ background-color: #dddddd;
                     <th>Item Name</th>
                     <th>Tag Number</th>
                     <th>Button</th>
-                    <td><button class="editbtn">edit</button></td>
                 </tr>
             </table>
         </div>
@@ -280,11 +279,6 @@ background-color: #dddddd;
                 alert(data.body)
               }
             })
-
-            $('#returnTable tbody').on( 'click', 'button', function () {
-                var data = table.row( $(this).parents('tr') ).data();
-                alert( data[0] +"'s button is: "+ data[ 5 ] );
-            } );
         }
 
 
