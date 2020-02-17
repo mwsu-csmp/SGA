@@ -189,21 +189,14 @@ background-color: #dddddd;
 
     <p><div class="container-fluid">
         <div class= "scrolling-container">
-            <table id="returnTable">
-              <tr>
-                 <th>RSO Name</th>
-                 <th>RSO Advisor</th>
-                 <th>Item Name</th>
-                 <th>Tag Number</th>
-                 <td>Button</td>
-              </tr>
-              <tbody id="after_add">
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td><button a href="">Click</button></td>
-              </tbody>
+            <table id = "returnTable">
+                <tr>
+                    <th>RSO Name</th>
+                    <th>RSO Advisor</th>
+                    <th>Item Name</th>
+                    <th>Tag Number</th>
+                    <th>Button</th>
+                </tr>
             </table>
         </div>
     </div>
@@ -242,7 +235,7 @@ background-color: #dddddd;
       var returnTable = document.getElementById('returnTable')
 
       $(document).ready(function(){
-          returnTable.style.visibility = 'hidden';
+          //returnTable.style.visibility = 'hidden';
           searchforrso.style.visibility = 'visible';
 
           $.ajax({
@@ -280,7 +273,7 @@ background-color: #dddddd;
                     str += "<th> " + data.body[i][s] + " </th>\n"
                   }
                   str += "\n</tr>"
-                  $("#after_add tbody").append(str)
+                  $("#returnTable tbody").append(str)
                 }
               } else {
                 alert(data.body)
