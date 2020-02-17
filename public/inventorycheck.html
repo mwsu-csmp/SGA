@@ -186,7 +186,7 @@ background-color: #dddddd;
             </form>
         </div>
     </div>
-<!--
+
     <p><div class="container-fluid">
         <div class= "scrolling-container">
             <table id = "returnTable">
@@ -201,29 +201,6 @@ background-color: #dddddd;
             </table>
         </div>
     </div>
--->
-    <table id="returnTable" class="display" style="width:100%">
-        <thead>
-            <tr>
-                <th>RSO Name</th>
-                <th>RSO Advisor</th>
-                <th>Item Name</th>
-                <th>Tag Number</th>
-                <th>Start date</th>
-                <th>Button</th>
-            </tr>
-        </thead>
-        <tfoot>
-            <tr>
-                <th>RSO Name</th>
-                <th>RSO Advisor</th>
-                <th>Item Name</th>
-                <th>Tag Number</th>
-                <th>Start date</th>
-                <th>Button</th>
-            </tr>
-        </tfoot>
-    </table>
 
     <div class="footer">
         <hr width="80%">
@@ -303,9 +280,10 @@ background-color: #dddddd;
                 alert(data.body)
               }
             })
-                        $('#returnTable tbody').on( 'click', 'button', function () {
+
+            $('#returnTable tbody').on( 'click', 'button', function () {
                 var data = table.row( $(this).parents('tr') ).data();
-                alert( data[0] +"'s salary is: "+ data[ 5 ] );
+                alert( data[0] +"'s button is: "+ data[ 5 ] );
             } );
         }
 
