@@ -137,6 +137,20 @@ input[type=submit]:active {
 position:relative;
 top:1px;
 }
+
+table {
+font-family: arial, sans-serif;
+border-collapse: collapse;
+width: 100%;
+}
+td, th {
+border: 1px solid #dddddd;
+text-align: left;
+padding: 8px;
+}
+tr:nth-child(even) {
+background-color: #dddddd;
+}
 </style>
 <div class="main-container">
   <div class="header">
@@ -173,7 +187,6 @@ top:1px;
         </div>
     </div>
 
-
     <div class="container-fluid">
         <div class= "scrolling-container">
             <table id = "returnTable">
@@ -187,6 +200,15 @@ top:1px;
         </div>
     </div>
 
+    <div class="footer">
+        <hr width="80%">
+        <p> Missouri Western State University <br>
+        Student Government Association <br>
+        4525 Downs Drive, St. Joseph, MO 64507 <br>
+        &#9400; 2019 Missouri Western State University
+        </p>
+    </div>
+</div> <!-- /.main-container-->
 
     <script>
       // Pull RSO Names data and assign it to #RSO_NAME
@@ -258,17 +280,6 @@ top:1px;
             })
         }
     </script>
-
-
-  <div class="footer">
-    <hr width="80%">
-      <p> Missouri Western State University <br>
-      Student Government Association <br>
-      4525 Downs Drive, St. Joseph, MO 64507 <br>
-      &#9400; 2019 Missouri Western State University
-      </p>
-  </div>
 </div>
-</div> <!-- /.main-container-->
 </body>
 </html>
