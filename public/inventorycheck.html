@@ -264,7 +264,7 @@ background-color: #dddddd;
             .then(data => {
               console.log(data.body);
               if (!(typeof data.body === "string" || data.body instanceof String) && data.body.length > 0){
-                searchforrso.style.visibility = 'hidden';
+                //searchforrso.style.visibility = 'hidden';
                 returnTable.style.visibility = 'visible';
                 for (i in data.body){
                   var str = "<tr>\n"
