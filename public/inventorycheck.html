@@ -193,6 +193,7 @@ top:1px;
                 <datalist id="RSO">
                 </datalist></p>
                 <a button type= "submit" id="submit" name="submit" value="RSO_NAME" class="selectButton">Select</a></p>
+                <input type="submit"  class="dropbtn btn btn-default" value="Search RSO">
             </form>
         </div>
     </div>
@@ -254,7 +255,34 @@ top:1px;
               }
           })
         })
+/*
+        searchforrso.onsubmit = async(e) => {
+          e.preventDefault();
 
+          var formData = new FormData(searchforrso)
+          fetch('https://secure-forest-78791.herokuapp.com/sga/searchrso.html', {
+              method: 'POST',
+              body: formData
+          }).then(response => response.json())
+            .then(data => {
+              console.log(data.body);
+              if (!(typeof data.body === "string" || data.body instanceof String) && data.body.length > 0){
+                searchforrso.style.visibility = 'hidden';
+                returnTable.style.visibility = 'visible';
+                for (i in data.body){
+                  var str = "<tr>\n"
+                  for(s in data.body[i]){
+                    str += "<th> " + data.body[i][s] + " </th>\n"
+                  }
+                  str += "\n</tr>"
+                  $("#returnTable tbody").append(str)
+                }
+              } else {
+                alert(data.body)
+              }
+            })
+        }
+*/
         searchforrso.onsubmit = async(e) => {
           e.preventDefault();
 
