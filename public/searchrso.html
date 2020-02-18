@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Search RSO</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="shortcut icon" type="image/png" href="https://i.imgur.com/uNjEIJ5.png"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="jquery-3.3.1.js"></script>
+<style type="text/css">
+  html,
+  body {
+  height: 100%;
+  position: relative;
+  }
+  .main-container {
+    min-height: 100vh;
+    overflow: hidden;
+    display: block;
+    position: relative;
+    padding-bottom: 400px;
+  }
+  .header {
+    background-color: #000;
+    height: 46px;
+  }
+  .headerlogo {
+    float: left;
+    margin-top: 7px;
+  }
+  .img {
+    border-style: none;
+    vertical-align: top;
+    max-width: 100%;
+    height: auto;
+  }
+/*
+  .headerextras {
+    float: right;
+    margin-top: 13px;
+    padding-right: 45px;
+    font-size: 16;
+  }
+*/
+  .footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    left: 0;
+    width: 100%;
+    background-color: white;
+    color: black;
+    text-align: center;
+    font-size: 11;
+  }
+  hr {
+    border: 0;
+    height: 1px;
+    background: #333;
+    background-image: linear-gradient(to right, #ccc, #333, #ccc);
+  }
+  .dropbtn {
+    color: white;
+    background-color: #1d1d1d;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+  }
+  .dropbtn:hover, .dropbtn:focus {
+    background-color: #f5cf00;
+  }
+  #myInput {
+    box-sizing: border-box;
+    background-image: url('searchicon.png');
+    background-position: 14px 12px;
+    background-repeat: no-repeat;
+    font-size: 16px;
+    padding: 14px 20px 12px 45px;
+    border: none;
+    border-bottom: 1px solid #ddd;
+  }
+  #myInput:focus {outline: 3px solid #ddd;}
+
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f6f6f6;
+    min-width: 230px;
+    overflow: auto;
+    border: 1px solid #ddd;
+    z-index: 1;
+  }
+  .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+  .dropdown a:hover {background-color: #ddd;}
+
+  .show {display: block;}
+
+  input[type=text], select {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+
+  input[type=submit] {
+    width: 100%;
+    color: white;
+    background-color: #1d1d1d;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  input[type=submit]:hover, input[type=submit]:focus {
+    background-color: #f5cf00;
+  }
+
+  table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+
+  tr:nth-child(even) {
+  background-color: #dddddd;
+  }
+
+</style>
+</style>
+<div class="main-container">
+  <div class="header">
+    <div class="headerlogo">
+      <a href="https://www.missouriwestern.edu/">
+      <img src="https://www.missouriwestern.edu/student-life/wp-content/uploads/2017/09/mwsulogo3.png" alt="Missouri Western State University">
+      </a>
+    </div>
+<!--
+    <div class="headerextras">
+      <a href="https://www.missouriwestern.edu/student-life/student-government-association/" target="_blank" style="color:#fec20a;">SGA Page
+      </a>
+    </div>
+-->
+  </div>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="jumbotron">
+        <div class="container">
+            <h1 class="display-3">Search RSO</h1>
+            <p>Search through the existing RSOs.</p>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <form id = "searchforrso">
+                <label for="RSO_NAME">Search RSO</label>
+                <p><input id="RSO_NAME" name = "RSO_NAME" list="RSO" placeholder="Search">
+                <datalist id="RSO">
+                </datalist></p>
+                <label for="RSO_ADVISOR">Search RSO Advisor</label>
+                <input type="text" id="RSO_ADVISOR" name="RSO_ADVISOR" placeholder="...">
+                <input type="submit"  class="dropbtn btn btn-default" value="Search RSO">
+            </form>
+        </div>
+      </div>
+      <div class="container-fluid"></div>
+        <div class= "scrolling-container">
+            <table id = "returnTable">
+                <tr>
+                  <th>RSO Name</th>
+                  <th>RSO Advisor</th>
+                  <th>Item Name</th>
+                  <th>Tag Number</th>
+               </tr>
+              </table>
+        </div>
+      </div>
+
+      <script>
+        $(document).ready(function(){
+           $.ajax({
+              url: 'https://secure-forest-78791.herokuapp.com/sga/rso_names',
+              method: 'GET',
+              dataType: 'json',
+              success: function(data){
+                 //console.log(data);
+                 for (key in data){
+                    var text = data[key]
+                    $('#RSO').append("<option>"+text+"</option>");
+                 }
+              },
+              error: function(jqXHR, textStatus, errorThrown){
+                 console.log(errorThrown);
+              }
+           })
+        })
+
+        var searchforrso = document.getElementById('searchforrso')
+        var returnTable = document.getElementById('returnTable')
+
+        $(document).ready(function(){
+          returnTable.style.visibility = 'hidden';
+          searchforrso.style.visibility = 'visible';
+
+          $.ajax({
+              url: 'https://secure-forest-78791.herokuapp.com/sga/rso_names',
+              method: 'GET',
+              dataType: 'json',
+              success: function(data){
+                //console.log(data);
+                for (key in data){
+                    var text = data[key]
+                }
+              },
+              error: function(jqXHR, textStatus, errorThrown){
+                console.log(errorThrown);
+              }
+          })
+        })
+
+        searchforrso.onsubmit = async(e) => {
+          e.preventDefault();
+
+          var formData = new FormData(searchforrso)
+          fetch('https://secure-forest-78791.herokuapp.com/sga/searchrso.html', {
+              method: 'POST',
+              body: formData
+          }).then(response => response.json())
+            .then(data => {
+              console.log(data.body);
+              if (!(typeof data.body === "string" || data.body instanceof String) && data.body.length > 0){
+                searchforrso.style.visibility = 'hidden';
+                returnTable.style.visibility = 'visible';
+                for (i in data.body){
+                  var str = "<tr>\n"
+                  for(s in data.body[i]){
+                    str += "<th> " + data.body[i][s] + " </th>\n"
+                  }
+                  str += "\n</tr>"
+                  $("#returnTable tbody").append(str)
+                }
+              } else {
+                alert(data.body)
+              }
+            })
+        }
+      </script>
+
+  <div class="footer">
+    <hr width="80%">
+      <p> Missouri Western State University <br>
+      Student Government Association <br>
+      4525 Downs Drive, St. Joseph, MO 64507 <br>
+      &#9400; 2019 Missouri Western State University
+      </p>
+  </div>
+</div>
+</div> <!-- /.main-container-->
+</body>
+</html>
